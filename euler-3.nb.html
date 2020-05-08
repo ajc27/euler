@@ -1780,26 +1780,10 @@ summary {
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<pre><code>now use the function to find prime factors
-
-
-&lt;!-- rnb-text-end --&gt;
-
-
-&lt;!-- rnb-chunk-begin --&gt;
-
-
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYyA9IGYgKyBmXG5cbmBgYCJ9 --&gt;
-
-```r
-c = f + f
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
+<p>now use the function to find prime factors</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5mYWN0b3JzID0gZnVuY3Rpb24obikge1xuICBcbiAgbWF4X3ByaW1lcyA9IDUwMFxuXG4gIHByaW1lcyA9IHByaW1lX251bWJlcnMobWF4X3ByaW1lcylcbiAgXG4gIGZjdHJzID0gYygpXG4gIFxuICB3aGlsZSAobiAhPSAwKXtcbiAgXG4gICAgZm9yIChpIGluIGMoMTptYXhfcHJpbWVzKSkge1xuICAgIFxuICAgICAgaWYgKG4gJSUgcHJpbWVzW2ldID09IDApe1xuICAgIFxuICAgICAgICBmY3RycyA9IGMoZmN0cnMsIHByaW1lc1tpXSlcbiAgICAgIFxuICAgICAgICBuID0gbi9wcmltZXNbaV1cbiAgICBcbiAgICAgICAgYnJlYWtcbiAgICAgIH1cbiAgICB9XG4gICAgXG4gICAgXG4gIH1cbn1cblxuXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5mYWN0b3JzID0gZnVuY3Rpb24obikge1xuICBcbiAgbWF4X3ByaW1lcyA9IDUwMFxuXG4gIHByaW1lcyA9IHByaW1lX251bWJlcnMobWF4X3ByaW1lcylcbiAgXG4gIGZjdHJzID0gYygpXG4gIFxuICBqID0gMVxuICBcbiAgd2hpbGUgKG4gIT0gMCl7XG4gIFxuICAgIGZvciAoaSBpbiBjKGo6bWF4X3ByaW1lcykpIHtcbiAgICAgIFxuICAgICAgIHByaW50KGNhdChcImkgPSBcIiwgaSxcImogaXNcIiwgaiwgXCJmY3RycyBpc1wiLCBmY3RycykpXG4gICAgICBcbiAgICAgIGlmIChuICUlIHByaW1lc1tpXSA9PSAwKXtcbiAgICBcbiAgICAgICAgZmN0cnMgPSBjKGZjdHJzLCBwcmltZXNbaV0pXG4gICAgICBcbiAgICAgICAgbiA9IG4vcHJpbWVzW2ldXG4gICAgICAgIGogPSBqKzFcbiAgICBcbiAgICAgICAgYnJlYWtcbiAgICAgIH1cbiAgICAgIFxuICAgICBcbiAgICB9XG4gICAgXG4gICAgXG4gIH1cbiAgXG4gIHJldHVybihmY3Rycylcbn1cbmBgYCJ9 -->
 <pre class="r"><code>
 factors = function(n) {
   
@@ -1809,30 +1793,38 @@ factors = function(n) {
   
   fctrs = c()
   
+  j = 1
+  
   while (n != 0){
   
-    for (i in c(1:max_primes)) {
-    
+    for (i in c(j:max_primes)) {
+      
+       print(cat(&quot;i = &quot;, i,&quot;j is&quot;, j, &quot;fctrs is&quot;, fctrs))
+      
       if (n %% primes[i] == 0){
     
         fctrs = c(fctrs, primes[i])
       
         n = n/primes[i]
+        j = j+1
     
         break
       }
+      
+     
     }
     
     
   }
-}
-</code></pre>
+  
+  return(fctrs)
+}</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkV1bGVyIDMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KTGFyZ2VzdCBwcmltZSBmYWN0b3INCiANClByb2JsZW0gMw0KVGhlIHByaW1lIGZhY3RvcnMgb2YgMTMxOTUgYXJlIDUsIDcsIDEzIGFuZCAyOS4NCg0KV2hhdCBpcyB0aGUgbGFyZ2VzdCBwcmltZSBmYWN0b3Igb2YgdGhlIG51bWJlciA2MDA4NTE0NzUxNDMgPw0KDQoNCmZ1bmN0aW9uIHRvIGNhbGN1bGF0ZSBwcmltZSBudW1iZXJzIHVwdG8gYSBnaXZlbiBudW1iZXINCmBgYHtyfQ0KcHJpbWVfbnVtYmVycyA9IGZ1bmN0aW9uKHRvcCkgew0KDQogY2FuZGlkYXRlcyA9IGMoMjp0b3ApDQogDQogcHJpbWVfbnVtcyA9IGMoKQ0KIA0KIGZvciAoaSBpbiBjKDI6dG9wKSkgew0KICANCiAgIGlmIChhbnkoY2FuZGlkYXRlcyA9PSBpKSkgew0KICAgIA0KICAgIHByaW1lX251bXMgPSBjKHByaW1lX251bXMsIGkpDQogICAgDQogICAgY2FuZGlkYXRlcyA9IGMoY2FuZGlkYXRlc1soY2FuZGlkYXRlcyAlJSBpKSAhPSAwXSwgaSkNCiAgICANCiAgIH0NCiB9DQogDQogcmV0dXJuKHByaW1lX251bXMpDQogDQogfQ0KDQpgYGANCmBgYA0Kbm93IHVzZSB0aGUgZnVuY3Rpb24gdG8gZmluZCBwcmltZSBmYWN0b3JzDQoNCmBgYHtyfQ0KYyA9IGYgKyBmDQoNCmBgYA0KDQoNCmBgYHtyfQ0KDQpmYWN0b3JzID0gZnVuY3Rpb24obikgew0KICANCiAgbWF4X3ByaW1lcyA9IDUwMA0KDQogIHByaW1lcyA9IHByaW1lX251bWJlcnMobWF4X3ByaW1lcykNCiAgDQogIGZjdHJzID0gYygpDQogIA0KICB3aGlsZSAobiAhPSAwKXsNCiAgDQogICAgZm9yIChpIGluIGMoMTptYXhfcHJpbWVzKSkgew0KICAgIA0KICAgICAgaWYgKG4gJSUgcHJpbWVzW2ldID09IDApew0KICAgIA0KICAgICAgICBmY3RycyA9IGMoZmN0cnMsIHByaW1lc1tpXSkNCiAgICAgIA0KICAgICAgICBuID0gbi9wcmltZXNbaV0NCiAgICANCiAgICAgICAgYnJlYWsNCiAgICAgIH0NCiAgICB9DQogICAgDQogICAgDQogIH0NCn0NCg0KDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkV1bGVyIDMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KTGFyZ2VzdCBwcmltZSBmYWN0b3INCiANClByb2JsZW0gMw0KVGhlIHByaW1lIGZhY3RvcnMgb2YgMTMxOTUgYXJlIDUsIDcsIDEzIGFuZCAyOS4NCg0KV2hhdCBpcyB0aGUgbGFyZ2VzdCBwcmltZSBmYWN0b3Igb2YgdGhlIG51bWJlciA2MDA4NTE0NzUxNDMgPw0KDQoNCmZ1bmN0aW9uIHRvIGNhbGN1bGF0ZSBwcmltZSBudW1iZXJzIHVwdG8gYSBnaXZlbiBudW1iZXINCmBgYHtyfQ0KcHJpbWVfbnVtYmVycyA9IGZ1bmN0aW9uKHRvcCkgew0KDQogY2FuZGlkYXRlcyA9IGMoMjp0b3ApDQogDQogcHJpbWVfbnVtcyA9IGMoKQ0KIA0KIGZvciAoaSBpbiBjKDI6dG9wKSkgew0KICANCiAgIGlmIChhbnkoY2FuZGlkYXRlcyA9PSBpKSkgew0KICAgIA0KICAgIHByaW1lX251bXMgPSBjKHByaW1lX251bXMsIGkpDQogICAgDQogICAgY2FuZGlkYXRlcyA9IGMoY2FuZGlkYXRlc1soY2FuZGlkYXRlcyAlJSBpKSAhPSAwXSwgaSkNCiAgICANCiAgIH0NCiB9DQogDQogcmV0dXJuKHByaW1lX251bXMpDQogDQogfQ0KDQpgYGANCg0KDQpub3cgdXNlIHRoZSBmdW5jdGlvbiB0byBmaW5kIHByaW1lIGZhY3RvcnMNCmBgYHtyfQ0KDQpmYWN0b3JzID0gZnVuY3Rpb24obikgew0KICANCiAgbWF4X3ByaW1lcyA9IDUwMA0KDQogIHByaW1lcyA9IHByaW1lX251bWJlcnMobWF4X3ByaW1lcykNCiAgDQogIGZjdHJzID0gYygpDQogIA0KICBqID0gMQ0KICANCiAgd2hpbGUgKG4gIT0gMCl7DQogIA0KICAgIGZvciAoaSBpbiBjKGo6bWF4X3ByaW1lcykpIHsNCiAgICAgIA0KICAgICAgcHJpbnQoY2F0KCJpID0gIiwgaSwiLCBqIGlzIiwgaiwgIiwgZmN0cnMgaXMiLCBmY3RycykpDQogICAgICANCiAgICAgIGlmIChuICUlIHByaW1lc1tpXSA9PSAwKXsNCiAgICANCiAgICAgICAgZmN0cnMgPSBjKGZjdHJzLCBwcmltZXNbaV0pDQogICAgICANCiAgICAgICAgbiA9IG4vcHJpbWVzW2ldDQogICAgICAgIGogPSBqKzENCiAgICANCiAgICAgICAgYnJlYWsNCiAgICAgIH0NCiAgICAgIA0KICAgICANCiAgICB9DQogICAgDQogICAgDQogIH0NCiAgDQogIHJldHVybihmY3RycykNCn0NCmBgYA0KDQoNCg==</div>
 
 
 

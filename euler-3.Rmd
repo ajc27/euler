@@ -34,15 +34,9 @@ prime_numbers = function(top) {
  }
 
 ```
-```
+
+
 now use the function to find prime factors
-
-```{r}
-c = f + f
-
-```
-
-
 ```{r}
 
 factors = function(n) {
@@ -53,24 +47,32 @@ factors = function(n) {
   
   fctrs = c()
   
+  j = 1
+  
   while (n != 0){
   
-    for (i in c(1:max_primes)) {
-    
+    for (i in c(j:max_primes)) {
+      
+      print(cat("i = ", i,", j is", j, ", fctrs is", fctrs))
+      
       if (n %% primes[i] == 0){
     
         fctrs = c(fctrs, primes[i])
       
         n = n/primes[i]
+        j = j+1
     
         break
       }
+      
+     
     }
     
     
   }
+  
+  return(fctrs)
 }
-
-
 ```
+
 
