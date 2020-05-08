@@ -1756,39 +1756,42 @@ summary {
 <p>Fibonacci function, using the closed form inside a loop</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmliID0gZnVuY3Rpb24oeCkge1xuICBhcnIgPSBudW1lcmljKHgpXG4gIGZvciAoTiBpbiAxOngpe1xuICAgIGFycltOXSA9IChnKipOIC0gKDEtZykqKk4pIC8gNSoqLjVcbiAgfSBcbiAgYXJyXG59XG5cbmZpYigxMClcbmBgYCJ9 -->
-<pre class="r"><code>fib = function(x) {
-  arr = numeric(x)
-  for (N in 1:x){
-    arr[N] = (g**N - (1-g)**N) / 5**.5
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIEZ1bmN0aW9uIHRvIGZpbmQgTnRoIGZpYm9uYWNjaSBudW1iZXIsIGFuZCBmb3JtIGFuIGFycmF5IHRocm91Z2ggcmVjdXJzaW9uXG5maWIgPSBmdW5jdGlvbih4KSB7XG4gIFxuICAjIEdvbGRlbiByYXRpb1xuICBnID0gKDEgKyA1KiouNSkgLyAyXG4gIFxuICBscyA9IG51bWVyaWMoKVxuICBcbiAgZm9yIChpIGluIDE6eCl7XG4gICAgaiA9IChnKippIC0gKDEtZykqKmkpIC8gNSoqLjVcbiAgICBsc1tOXSA9IGpcbiAgICBcbiAgICAjIE9uY2UgXG4gICAgaWYgKGogPiB4KXtcbiAgICAgIGJyZWFrXG4gICAgfVxuICB9IFxuICBcbiAgbHNcbn1cblxuYGBgIn0= -->
+<pre class="r"><code>
+# Function to find Nth fibonacci number, and form an array through recursion
+fib = function(x) {
+  
+  # Golden ratio
+  g = (1 + 5**.5) / 2
+  
+  ls = numeric()
+  
+  for (i in 1:x){
+    j = (g**i - (1-g)**i) / 5**.5
+    ls[N] = j
+    
+    # Once 
+    if (j &gt; x){
+      break
+    }
   } 
-  arr
+  
+  ls
 }
-
-fib(10)</code></pre>
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAgMSAgMSAgMiAgMyAgNSAgOCAxMyAyMSAzNCA1NVxuIn0= -->
-<pre><code> [1]  1  1  2  3  5  8 13 21 34 55</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTiA9IDhcblxuZyA9ICgxICsgNSoqLjUpIC8gMlxuXG4oZyoqTiAtICgxLWcpKipOKSAvIDUqKi41XG5gYGAifQ== -->
-<pre class="r"><code>N = 8
-
-g = (1 + 5**.5) / 2
-
-(g**N - (1-g)**N) / 5**.5</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2hpY2goYXJyPEUpXG5gYGAifQ== -->
+<pre class="r"><code>which(arr&lt;E)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIxXG4ifQ== -->
-<pre><code>[1] 21</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KRXZlbiBGaWJvbmFjY2kgbnVtYmVycw0KDQpQcm9ibGVtIDINCkVhY2ggbmV3IHRlcm0gaW4gdGhlIEZpYm9uYWNjaSBzZXF1ZW5jZSBpcyBnZW5lcmF0ZWQgYnkgYWRkaW5nIHRoZSBwcmV2aW91cyB0d28gdGVybXMuIEJ5IHN0YXJ0aW5nIHdpdGggMSBhbmQgMiwgdGhlIGZpcnN0IDEwIHRlcm1zIHdpbGwgYmU6DQoNCjEsIDIsIDMsIDUsIDgsIDEzLCAyMSwgMzQsIDU1LCA4OSwgLi4uDQoNCkJ5IGNvbnNpZGVyaW5nIHRoZSB0ZXJtcyBpbiB0aGUgRmlib25hY2NpIHNlcXVlbmNlIHdob3NlIHZhbHVlcyBkbyBub3QgZXhjZWVkIGZvdXIgbWlsbGlvbiwgZmluZCB0aGUgc3VtIG9mIHRoZSBldmVuLXZhbHVlZCB0ZXJtcy4NCg0KRmlib25hY2NpIGZ1bmN0aW9uLCB1c2luZyB0aGUgY2xvc2VkIGZvcm0gaW5zaWRlIGEgbG9vcA0KYGBge3J9DQojIEdvbGRlbiByYXRpbw0KZyA9ICgxICsgNSoqLjUpIC8gMg0KDQojIEZ1bmN0aW9uIHRvIGZpbmQgTnRoIGZpYm9uYWNjaSBudW1iZXIsIGFuZCBmb3JtIGFuIGFycmF5IHRocm91Z2ggcmVjdXJzaW9uDQpmaWIgPSBmdW5jdGlvbih4KSB7DQogIA0KICBhcnIgPSBudW1lcmljKHgpDQogIA0KICBmb3IgKE4gaW4gMTp4KXsNCiAgICBhcnJbTl0gPSAoZyoqTiAtICgxLWcpKipOKSAvIDUqKi41DQogIH0gDQogIA0KICBhcnINCn0NCg0KYGBgDQoNCmBgYHtyfQ0KTiA9IDgNCg0KZyA9ICgxICsgNSoqLjUpIC8gMg0KDQooZyoqTiAtICgxLWcpKipOKSAvIDUqKi41DQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KRXZlbiBGaWJvbmFjY2kgbnVtYmVycw0KDQpQcm9ibGVtIDINCkVhY2ggbmV3IHRlcm0gaW4gdGhlIEZpYm9uYWNjaSBzZXF1ZW5jZSBpcyBnZW5lcmF0ZWQgYnkgYWRkaW5nIHRoZSBwcmV2aW91cyB0d28gdGVybXMuIEJ5IHN0YXJ0aW5nIHdpdGggMSBhbmQgMiwgdGhlIGZpcnN0IDEwIHRlcm1zIHdpbGwgYmU6DQoNCjEsIDIsIDMsIDUsIDgsIDEzLCAyMSwgMzQsIDU1LCA4OSwgLi4uDQoNCkJ5IGNvbnNpZGVyaW5nIHRoZSB0ZXJtcyBpbiB0aGUgRmlib25hY2NpIHNlcXVlbmNlIHdob3NlIHZhbHVlcyBkbyBub3QgZXhjZWVkIGZvdXIgbWlsbGlvbiwgZmluZCB0aGUgc3VtIG9mIHRoZSBldmVuLXZhbHVlZCB0ZXJtcy4NCg0KRmlib25hY2NpIGZ1bmN0aW9uLCB1c2luZyB0aGUgY2xvc2VkIGZvcm0gaW5zaWRlIGEgbG9vcA0KYGBge3J9DQoNCiMgRnVuY3Rpb24gdG8gZmluZCBOdGggZmlib25hY2NpIG51bWJlciwgYW5kIGZvcm0gYW4gYXJyYXkgdGhyb3VnaCByZWN1cnNpb24NCmZpYiA9IGZ1bmN0aW9uKHgpIHsNCiAgDQogICMgR29sZGVuIHJhdGlvDQogIGcgPSAoMSArIDUqKi41KSAvIDINCiAgDQogIGxzID0gbnVtZXJpYygpDQogIA0KICBmb3IgKGkgaW4gMTp4KXsNCiAgICBqID0gKGcqKmkgLSAoMS1nKSoqaSkgLyA1KiouNQ0KICAgIGxzW05dID0gag0KICAgIA0KICAgICMgT25jZSANCiAgICBpZiAoaiA+IHgpew0KICAgICAgYnJlYWsNCiAgICB9DQogIH0gDQogIA0KICBscw0KfQ0KDQpgYGANCg0KYGBge3J9DQp3aGljaChhcnI8RSkNCmBgYA0KDQo=</div>
 
 
 

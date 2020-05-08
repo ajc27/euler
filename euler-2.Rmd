@@ -13,28 +13,31 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 
 Fibonacci function, using the closed form inside a loop
 ```{r}
-# Golden ratio
-g = (1 + 5**.5) / 2
 
 # Function to find Nth fibonacci number, and form an array through recursion
 fib = function(x) {
   
-  arr = numeric(x)
+  # Golden ratio
+  g = (1 + 5**.5) / 2
   
-  for (N in 1:x){
-    arr[N] = (g**N - (1-g)**N) / 5**.5
+  ls = numeric()
+  
+  for (i in 1:x){
+    j = (g**i - (1-g)**i) / 5**.5
+    ls[N] = j
+    
+    # Once 
+    if (j > x){
+      break
+    }
   } 
   
-  arr
+  ls
 }
 
 ```
 
 ```{r}
-N = 8
-
-g = (1 + 5**.5) / 2
-
-(g**N - (1-g)**N) / 5**.5
+which(arr<E)
 ```
 
