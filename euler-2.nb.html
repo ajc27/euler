@@ -1756,7 +1756,7 @@ summary {
 <p>Fibonacci function, using the closed form inside a loop</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIEZ1bmN0aW9uIHRvIGZpbmQgTnRoIGZpYm9uYWNjaSBudW1iZXIsIGFuZCBmb3JtIGFuIGFycmF5IHRocm91Z2ggcmVjdXJzaW9uXG5maWIgPSBmdW5jdGlvbih4KSB7XG4gIFxuICAjIEdvbGRlbiByYXRpb1xuICBnID0gKDEgKyA1KiouNSkgLyAyXG4gIFxuICBscyA9IG51bWVyaWMoKVxuICBcbiAgZm9yIChpIGluIDE6eCl7XG4gICAgaiA9IChnKippIC0gKDEtZykqKmkpIC8gNSoqLjVcbiAgICBsc1tpXSA9IGpcbiAgICBcbiAgICAjIE9uY2UgXG4gICAgaWYgKGogPiB4KXtcbiAgICAgIGxzID0gbHMgW2xzPHhdXG4gICAgICBicmVha1xuICAgIH1cbiAgfSBcbiAgXG4gIGxzXG59XG5cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIEZ1bmN0aW9uIHRvIGZpbmQgTnRoIGZpYm9uYWNjaSBudW1iZXIsIGFuZCBmb3JtIGFuIGFycmF5IHRocm91Z2ggcmVjdXJzaW9uXG5maWIgPSBmdW5jdGlvbih4KSB7XG4gIFxuICAjIEdvbGRlbiByYXRpb1xuICBnID0gKDEgKyA1KiouNSkgLyAyXG4gIFxuICBscyA9IGludGVnZXIoKVxuICBcbiAgZm9yIChpIGluIDE6eCl7XG4gICAgXG4gICAgaiA9IChnKippIC0gKDEtZykqKmkpIC8gNSoqLjVcbiAgICBcbiAgICBsc1tpXSA9IGpcbiAgICBcbiAgICAjIE9uY2Ugd2UndmUgZ29uZSBvdmVyIHRoZSBpbnB1dCBudW1iZXIsIGN1dCB0aGUgbGFzdCBvbmUgb2ZmIGFuZCBicmVhayB0aGUgbG9vcFxuICAgIGlmIChqID4geCl7XG4gICAgICBscyA9IGxzIFtsczx4XVxuICAgICAgYnJlYWtcbiAgICB9XG4gIH0gXG4gIFxuICBsc1xufVxuXG5gYGAifQ== -->
 <pre class="r"><code>
 # Function to find Nth fibonacci number, and form an array through recursion
 fib = function(x) {
@@ -1764,13 +1764,15 @@ fib = function(x) {
   # Golden ratio
   g = (1 + 5**.5) / 2
   
-  ls = numeric()
+  ls = integer()
   
   for (i in 1:x){
+    
     j = (g**i - (1-g)**i) / 5**.5
+    
     ls[i] = j
     
-    # Once 
+    # Once we&#39;ve gone over the input number, cut the last one off and break the loop
     if (j &gt; x){
       ls = ls [ls&lt;x]
       break
@@ -1783,16 +1785,35 @@ fib = function(x) {
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Subset out the even numbers</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud2hpY2goYXJyPEUpXG5gYGAifQ== -->
-<pre class="r"><code>which(arr&lt;E)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBzdWJzZXQgdGhlIGV2ZW4gbnVtYmVyc1xuIyAobW9kdWxvIG5lZWRzIHRvIHRha2UgYW4gaW50ZWdlciBpbnB1dCwgbm90IG51bWVyaWMpXG5hID0gbHNbYXMuaW50ZWdlcihscykgJSUgMiA9PSAwXVxuXG5gYGAifQ== -->
+<pre class="r"><code># subset the even numbers
+# (modulo needs to take an integer input, not numeric)
+a = ls[as.integer(ls) %% 2 == 0]
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Sum the new list</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5zID0gc3VtKGEpXG5gYGAifQ== -->
+<pre class="r"><code>ans = sum(a)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubHMgPSBmaWIoNDAwMDAwMClcbmBgYCJ9 -->
+<pre class="r"><code>ls = fib(4000000)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KRXZlbiBGaWJvbmFjY2kgbnVtYmVycw0KDQpQcm9ibGVtIDINCkVhY2ggbmV3IHRlcm0gaW4gdGhlIEZpYm9uYWNjaSBzZXF1ZW5jZSBpcyBnZW5lcmF0ZWQgYnkgYWRkaW5nIHRoZSBwcmV2aW91cyB0d28gdGVybXMuIEJ5IHN0YXJ0aW5nIHdpdGggMSBhbmQgMiwgdGhlIGZpcnN0IDEwIHRlcm1zIHdpbGwgYmU6DQoNCjEsIDIsIDMsIDUsIDgsIDEzLCAyMSwgMzQsIDU1LCA4OSwgLi4uDQoNCkJ5IGNvbnNpZGVyaW5nIHRoZSB0ZXJtcyBpbiB0aGUgRmlib25hY2NpIHNlcXVlbmNlIHdob3NlIHZhbHVlcyBkbyBub3QgZXhjZWVkIGZvdXIgbWlsbGlvbiwgZmluZCB0aGUgc3VtIG9mIHRoZSBldmVuLXZhbHVlZCB0ZXJtcy4NCg0KRmlib25hY2NpIGZ1bmN0aW9uLCB1c2luZyB0aGUgY2xvc2VkIGZvcm0gaW5zaWRlIGEgbG9vcA0KYGBge3J9DQoNCiMgRnVuY3Rpb24gdG8gZmluZCBOdGggZmlib25hY2NpIG51bWJlciwgYW5kIGZvcm0gYW4gYXJyYXkgdGhyb3VnaCByZWN1cnNpb24NCmZpYiA9IGZ1bmN0aW9uKHgpIHsNCiAgDQogICMgR29sZGVuIHJhdGlvDQogIGcgPSAoMSArIDUqKi41KSAvIDINCiAgDQogIGxzID0gbnVtZXJpYygpDQogIA0KICBmb3IgKGkgaW4gMTp4KXsNCiAgICANCiAgICBqID0gKGcqKmkgLSAoMS1nKSoqaSkgLyA1KiouNQ0KICAgIA0KICAgIGxzW2ldID0gag0KICAgIA0KICAgICMgT25jZSB3ZSd2ZSBnb25lIG92ZXIgdGhlIGlucHV0IG51bWJlciwgY3V0IHRoZSBsYXN0IG9uZSBvZmYgYW5kIGJyZWFrIHRoZSBsb29wDQogICAgaWYgKGogPiB4KXsNCiAgICAgIGxzID0gbHMgW2xzPHhdDQogICAgICBicmVhaw0KICAgIH0NCiAgfSANCiAgDQogIGxzDQp9DQoNCmBgYA0KDQpgYGB7cn0NCndoaWNoKGFycjxFKQ0KYGBgDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KRXZlbiBGaWJvbmFjY2kgbnVtYmVycw0KDQpQcm9ibGVtIDINCkVhY2ggbmV3IHRlcm0gaW4gdGhlIEZpYm9uYWNjaSBzZXF1ZW5jZSBpcyBnZW5lcmF0ZWQgYnkgYWRkaW5nIHRoZSBwcmV2aW91cyB0d28gdGVybXMuIEJ5IHN0YXJ0aW5nIHdpdGggMSBhbmQgMiwgdGhlIGZpcnN0IDEwIHRlcm1zIHdpbGwgYmU6DQoNCjEsIDIsIDMsIDUsIDgsIDEzLCAyMSwgMzQsIDU1LCA4OSwgLi4uDQoNCkJ5IGNvbnNpZGVyaW5nIHRoZSB0ZXJtcyBpbiB0aGUgRmlib25hY2NpIHNlcXVlbmNlIHdob3NlIHZhbHVlcyBkbyBub3QgZXhjZWVkIGZvdXIgbWlsbGlvbiwgZmluZCB0aGUgc3VtIG9mIHRoZSBldmVuLXZhbHVlZCB0ZXJtcy4NCg0KRmlib25hY2NpIGZ1bmN0aW9uLCB1c2luZyB0aGUgY2xvc2VkIGZvcm0gaW5zaWRlIGEgbG9vcA0KYGBge3J9DQoNCiMgRnVuY3Rpb24gdG8gZmluZCBOdGggZmlib25hY2NpIG51bWJlciwgYW5kIGZvcm0gYW4gYXJyYXkgdGhyb3VnaCByZWN1cnNpb24NCmZpYiA9IGZ1bmN0aW9uKHgpIHsNCiAgDQogICMgR29sZGVuIHJhdGlvDQogIGcgPSAoMSArIDUqKi41KSAvIDINCiAgDQogIGxzID0gaW50ZWdlcigpDQogIA0KICBmb3IgKGkgaW4gMTp4KXsNCiAgICANCiAgICBqID0gKGcqKmkgLSAoMS1nKSoqaSkgLyA1KiouNQ0KICAgIA0KICAgIGxzW2ldID0gag0KICAgIA0KICAgICMgT25jZSB3ZSd2ZSBnb25lIG92ZXIgdGhlIGlucHV0IG51bWJlciwgY3V0IHRoZSBsYXN0IG9uZSBvZmYgYW5kIGJyZWFrIHRoZSBsb29wDQogICAgaWYgKGogPiB4KXsNCiAgICAgIGxzID0gbHMgW2xzPHhdDQogICAgICBicmVhaw0KICAgIH0NCiAgfSANCiAgDQogIGxzDQp9DQoNCmBgYA0KDQpTdWJzZXQgb3V0IHRoZSBldmVuIG51bWJlcnMNCmBgYHtyfQ0KIyBzdWJzZXQgdGhlIGV2ZW4gbnVtYmVycw0KIyAobW9kdWxvIG5lZWRzIHRvIHRha2UgYW4gaW50ZWdlciBpbnB1dCwgbm90IG51bWVyaWMpDQphID0gbHNbYXMuaW50ZWdlcihscykgJSUgMiA9PSAwXQ0KDQpgYGANCg0KU3VtIHRoZSBuZXcgbGlzdA0KYGBge3J9DQphbnMgPSBzdW0oYSkNCmBgYA0KDQoNCmBgYHtyfQ0KbHMgPSBmaWIoNDAwMDAwMCkNCmBgYA0KDQo=</div>
 
 
 

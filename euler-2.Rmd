@@ -20,7 +20,7 @@ fib = function(x) {
   # Golden ratio
   g = (1 + 5**.5) / 2
   
-  ls = numeric()
+  ls = integer()
   
   for (i in 1:x){
     
@@ -40,7 +40,21 @@ fib = function(x) {
 
 ```
 
+Subset out the even numbers
 ```{r}
-which(arr<E)
+# subset the even numbers
+# (modulo needs to take an integer input, not numeric)
+a = ls[as.integer(ls) %% 2 == 0]
+
+```
+
+Sum the new list
+```{r}
+ans = sum(a)
+```
+
+
+```{r}
+ls = fib(4000000)
 ```
 
