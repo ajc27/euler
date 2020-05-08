@@ -1,0 +1,76 @@
+---
+title: "Euler 3"
+output: html_notebook
+---
+Largest prime factor
+ 
+Problem 3
+The prime factors of 13195 are 5, 7, 13 and 29.
+
+What is the largest prime factor of the number 600851475143 ?
+
+
+function to calculate prime numbers upto a given number
+```{r}
+prime_numbers = function(top) {
+
+ candidates = c(2:top)
+ 
+ prime_nums = c()
+ 
+ for (i in c(2:top)) {
+  
+   if (any(candidates == i)) {
+    
+    prime_nums = c(prime_nums, i)
+    
+    candidates = c(candidates[(candidates %% i) != 0], i)
+    
+   }
+ }
+ 
+ return(prime_nums)
+ 
+ }
+
+```
+```
+now use the function to find prime factors
+
+```{r}
+c = f + f
+
+```
+
+
+```{r}
+
+factors = function(n) {
+  
+  max_primes = 500
+
+  primes = prime_numbers(max_primes)
+  
+  fctrs = c()
+  
+  while (n != 0){
+  
+    for (i in c(1:max_primes)) {
+    
+      if (n %% primes[i] == 0){
+    
+        fctrs = c(fctrs, primes[i])
+      
+        n = n/primes[i]
+    
+        break
+      }
+    }
+    
+    
+  }
+}
+
+
+```
+
