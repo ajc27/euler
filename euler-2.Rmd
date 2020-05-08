@@ -23,11 +23,14 @@ fib = function(x) {
   ls = numeric()
   
   for (i in 1:x){
-    j = (g**i - (1-g)**i) / 5**.5
-    ls[N] = j
     
-    # Once 
+    j = (g**i - (1-g)**i) / 5**.5
+    
+    ls[i] = j
+    
+    # Once we've gone over the input number, cut the last one off and break the loop
     if (j > x){
+      ls = ls [ls<x]
       break
     }
   } 
