@@ -13,42 +13,82 @@ What is the largest prime factor of the number 600851475143 ?
 
 System:
 
-Step 1 create vector of primes up to 1,000,000
+Step 1 - create vector of primes up to 1,000,000
 Step 2 - go through the list of primes, dividing num by each until mod = 0
 Step 3 - Store that number in a vector and update num to the output of the division
 Step 4 - When new_num = 0, return the largest number in the new vector
 
 function to calculate prime numbers upto a given number
-```{r}
-prime_numbers = function(top) {
 
- candidates = c(2:top)
- 
- prime_nums = c()
- 
- for (i in c(2:top)) {
-  
-   if (any(candidates == i)) {
-    
-    prime_nums = c(prime_nums, i)
-    
-    candidates = c(candidates[(candidates %% i) != 0], i)
-    
-   }
- }
- 
- return(prime_nums)
- 
- }
+
+from interweb... sieve of erastothenes
+```{r}
+
+
+sieve <- function(n) {
+  if (n < 2) return(NULL)
+  a <- rep(T, n)
+  a[1] <- F
+  for(i in seq(n)) {
+    if (a[i]) {
+      j <- i * i
+      if (j > n) return(which(a))
+      a[seq(j, n, by=i)] <- F
+    }
+  }
+}
 
 ```
 
 
 
+My version of the Sieve of Erastothenes...
+
+Step 1 - if input is less than 2, break the function
+Step 2 - make a boolean vector of all possible numbers upto [num], default all as TRUE
+Step 3 - make '1' FALSE
+Step 4 - loop through all numbers upto [num]
+  if the number at i is not already marked as false
+    square the number at i
+    if the square is less than [num]
+      mark all multiples of the square of i, upto [num] as false
+    else (square of i is greater than [num]), return the index of all the TRUE values in the boolean vector
+      
+
 ```{r}
-num = 13195
+
+prime_numbers <- function(num) {
+  
+  if (num < 2) return(NULL)
+  
+  primes_boolean <- rep(T, num)
+  
+  primes_boolean[1] <- F
+  
+  for(i in seq(num)) {
+   
+     if (primes_boolean[i]) {
+      
+       i_sq <- i * i
+       
+      if (i_sq > num) return(which(primes_boolean))
+      
+       primes_boolean[seq(i_sq, num, by=i)] <- FALSE
+    }
+  }
+}
+
+```
+
+
+My new code, based on a more simple stepwise iteration than previsou fancy attempt
+
+
+```{r}
+
+num = 600851475143
 new_num = num
-primes = prime_numbers(num)
+primes = prime_numbers(sqrt(num))
 t = length(primes)
 factors = integer()
 p = 1
@@ -70,47 +110,5 @@ for (i in 1:t){
 ```
 
 
-
-
-
-
-now use the function to find prime factors
-```{r}
-
-factors = function(n) {
-  
-  max_primes = 500
-
-  primes = prime_numbers(max_primes)
-  
-  fctrs = c()
-  
-  j = 1
-  
-  while (n != 0){
-  
-    for (i in c(j:max_primes)) {
-      
-      print(cat("i = ", i,", j is", j, ", fctrs is", fctrs))
-      
-      if (n %% primes[i] == 0){
-    
-        fctrs = c(fctrs, primes[i])
-      
-        n = n/primes[i]
-        j = j+1
-    
-        break
-      }
-      
-     
-    }
-    
-    
-  }
-  
-  return(fctrs)
-}
-```
 
 
