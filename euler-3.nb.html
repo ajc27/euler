@@ -1752,6 +1752,8 @@ summary {
 <p>Largest prime factor</p>
 <p>Problem 3 The prime factors of 13195 are 5, 7, 13 and 29.</p>
 <p>What is the largest prime factor of the number 600851475143 ?</p>
+<p>System:</p>
+<p>Step 1 create vector of primes up to 1,000,000 Step 2 - go through the list of primes, dividing num by each until mod = 0 Step 3 - Store that number in a vector and update num to the output of the division Step 4 - When new_num = 0, return the largest number in the new vector</p>
 <p>function to calculate prime numbers upto a given number</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -1778,6 +1780,39 @@ summary {
  }
 </code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubnVtID0gMTMxOTVcbm5ld19udW0gPSBudW1cbnByaW1lcyA9IHByaW1lX251bWJlcnMobnVtKVxudCA9IGxlbmd0aChwcmltZXMpXG5mYWN0b3JzID0gaW50ZWdlcigpXG5wID0gMVxuXG5mb3IgKGkgaW4gMTp0KXtcbiAgaWYgKG5ld19udW0gJSUgcHJpbWVzW2ldID09IDApIHtcbiAgICBwcmludChjYXQoXCJhZGRpbmcgXCIsIHByaW1lc1tpXSwgXCIgdG8gZmFjdG9yc1wiKSlcbiAgICBmYWN0b3JzW3BdID0gcHJpbWVzW2ldXG4gICAgcCA9IHArMVxuICAgIG5ld19udW0gPSBuZXdfbnVtL3ByaW1lc1tpXVxuICB9XG4gIGlmIChuZXdfbnVtID09IDEpIHtcbiAgICBhbnMgPSBtYXgoZmFjdG9ycylcbiAgICBwcmludChjYXQoXCJhbnN3ZXIgaXMgXCIsIGFucykpXG4gICAgYnJlYWtcbiAgfVxufVxuYGBgIn0= -->
+<pre class="r"><code>num = 13195
+new_num = num
+primes = prime_numbers(num)
+t = length(primes)
+factors = integer()
+p = 1
+
+for (i in 1:t){
+  if (new_num %% primes[i] == 0) {
+    print(cat(&quot;adding &quot;, primes[i], &quot; to factors&quot;))
+    factors[p] = primes[i]
+    p = p+1
+    new_num = new_num/primes[i]
+  }
+  if (new_num == 1) {
+    ans = max(factors)
+    print(cat(&quot;answer is &quot;, ans))
+    break
+  }
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiYWRkaW5nICA1ICB0byBmYWN0b3JzTlVMTFxuYWRkaW5nICA3ICB0byBmYWN0b3JzTlVMTFxuYWRkaW5nICAxMyAgdG8gZmFjdG9yc05VTExcbmFkZGluZyAgMjkgIHRvIGZhY3RvcnNOVUxMXG5hbnN3ZXIgaXMgIDI5TlVMTFxuIn0= -->
+<pre><code>adding  5  to factorsNULL
+adding  7  to factorsNULL
+adding  13  to factorsNULL
+adding  29  to factorsNULL
+answer is  29NULL</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>now use the function to find prime factors</p>
@@ -1824,7 +1859,7 @@ factors = function(n) {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkV1bGVyIDMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KTGFyZ2VzdCBwcmltZSBmYWN0b3INCiANClByb2JsZW0gMw0KVGhlIHByaW1lIGZhY3RvcnMgb2YgMTMxOTUgYXJlIDUsIDcsIDEzIGFuZCAyOS4NCg0KV2hhdCBpcyB0aGUgbGFyZ2VzdCBwcmltZSBmYWN0b3Igb2YgdGhlIG51bWJlciA2MDA4NTE0NzUxNDMgPw0KDQoNCmZ1bmN0aW9uIHRvIGNhbGN1bGF0ZSBwcmltZSBudW1iZXJzIHVwdG8gYSBnaXZlbiBudW1iZXINCmBgYHtyfQ0KcHJpbWVfbnVtYmVycyA9IGZ1bmN0aW9uKHRvcCkgew0KDQogY2FuZGlkYXRlcyA9IGMoMjp0b3ApDQogDQogcHJpbWVfbnVtcyA9IGMoKQ0KIA0KIGZvciAoaSBpbiBjKDI6dG9wKSkgew0KICANCiAgIGlmIChhbnkoY2FuZGlkYXRlcyA9PSBpKSkgew0KICAgIA0KICAgIHByaW1lX251bXMgPSBjKHByaW1lX251bXMsIGkpDQogICAgDQogICAgY2FuZGlkYXRlcyA9IGMoY2FuZGlkYXRlc1soY2FuZGlkYXRlcyAlJSBpKSAhPSAwXSwgaSkNCiAgICANCiAgIH0NCiB9DQogDQogcmV0dXJuKHByaW1lX251bXMpDQogDQogfQ0KDQpgYGANCg0KDQpub3cgdXNlIHRoZSBmdW5jdGlvbiB0byBmaW5kIHByaW1lIGZhY3RvcnMNCmBgYHtyfQ0KDQpmYWN0b3JzID0gZnVuY3Rpb24obikgew0KICANCiAgbWF4X3ByaW1lcyA9IDUwMA0KDQogIHByaW1lcyA9IHByaW1lX251bWJlcnMobWF4X3ByaW1lcykNCiAgDQogIGZjdHJzID0gYygpDQogIA0KICBqID0gMQ0KICANCiAgd2hpbGUgKG4gIT0gMCl7DQogIA0KICAgIGZvciAoaSBpbiBjKGo6bWF4X3ByaW1lcykpIHsNCiAgICAgIA0KICAgICAgcHJpbnQoY2F0KCJpID0gIiwgaSwiLCBqIGlzIiwgaiwgIiwgZmN0cnMgaXMiLCBmY3RycykpDQogICAgICANCiAgICAgIGlmIChuICUlIHByaW1lc1tpXSA9PSAwKXsNCiAgICANCiAgICAgICAgZmN0cnMgPSBjKGZjdHJzLCBwcmltZXNbaV0pDQogICAgICANCiAgICAgICAgbiA9IG4vcHJpbWVzW2ldDQogICAgICAgIGogPSBqKzENCiAgICANCiAgICAgICAgYnJlYWsNCiAgICAgIH0NCiAgICAgIA0KICAgICANCiAgICB9DQogICAgDQogICAgDQogIH0NCiAgDQogIHJldHVybihmY3RycykNCn0NCmBgYA0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkV1bGVyIDMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KTGFyZ2VzdCBwcmltZSBmYWN0b3INCiANClByb2JsZW0gMw0KVGhlIHByaW1lIGZhY3RvcnMgb2YgMTMxOTUgYXJlIDUsIDcsIDEzIGFuZCAyOS4NCg0KV2hhdCBpcyB0aGUgbGFyZ2VzdCBwcmltZSBmYWN0b3Igb2YgdGhlIG51bWJlciA2MDA4NTE0NzUxNDMgPw0KDQoNCg0KU3lzdGVtOg0KDQpTdGVwIDEgY3JlYXRlIHZlY3RvciBvZiBwcmltZXMgdXAgdG8gMSwwMDAsMDAwDQpTdGVwIDIgLSBnbyB0aHJvdWdoIHRoZSBsaXN0IG9mIHByaW1lcywgZGl2aWRpbmcgbnVtIGJ5IGVhY2ggdW50aWwgbW9kID0gMA0KU3RlcCAzIC0gU3RvcmUgdGhhdCBudW1iZXIgaW4gYSB2ZWN0b3IgYW5kIHVwZGF0ZSBudW0gdG8gdGhlIG91dHB1dCBvZiB0aGUgZGl2aXNpb24NClN0ZXAgNCAtIFdoZW4gbmV3X251bSA9IDAsIHJldHVybiB0aGUgbGFyZ2VzdCBudW1iZXIgaW4gdGhlIG5ldyB2ZWN0b3INCg0KZnVuY3Rpb24gdG8gY2FsY3VsYXRlIHByaW1lIG51bWJlcnMgdXB0byBhIGdpdmVuIG51bWJlcg0KYGBge3J9DQpwcmltZV9udW1iZXJzID0gZnVuY3Rpb24odG9wKSB7DQoNCiBjYW5kaWRhdGVzID0gYygyOnRvcCkNCiANCiBwcmltZV9udW1zID0gYygpDQogDQogZm9yIChpIGluIGMoMjp0b3ApKSB7DQogIA0KICAgaWYgKGFueShjYW5kaWRhdGVzID09IGkpKSB7DQogICAgDQogICAgcHJpbWVfbnVtcyA9IGMocHJpbWVfbnVtcywgaSkNCiAgICANCiAgICBjYW5kaWRhdGVzID0gYyhjYW5kaWRhdGVzWyhjYW5kaWRhdGVzICUlIGkpICE9IDBdLCBpKQ0KICAgIA0KICAgfQ0KIH0NCiANCiByZXR1cm4ocHJpbWVfbnVtcykNCiANCiB9DQoNCmBgYA0KDQoNCg0KYGBge3J9DQpudW0gPSAxMzE5NQ0KbmV3X251bSA9IG51bQ0KcHJpbWVzID0gcHJpbWVfbnVtYmVycyhudW0pDQp0ID0gbGVuZ3RoKHByaW1lcykNCmZhY3RvcnMgPSBpbnRlZ2VyKCkNCnAgPSAxDQoNCmZvciAoaSBpbiAxOnQpew0KICBpZiAobmV3X251bSAlJSBwcmltZXNbaV0gPT0gMCkgew0KICAgIHByaW50KGNhdCgiYWRkaW5nICIsIHByaW1lc1tpXSwgIiB0byBmYWN0b3JzIikpDQogICAgZmFjdG9yc1twXSA9IHByaW1lc1tpXQ0KICAgIHAgPSBwKzENCiAgICBuZXdfbnVtID0gbmV3X251bS9wcmltZXNbaV0NCiAgfQ0KICBpZiAobmV3X251bSA9PSAxKSB7DQogICAgYW5zID0gbWF4KGZhY3RvcnMpDQogICAgcHJpbnQoY2F0KCJhbnN3ZXIgaXMgIiwgYW5zKSkNCiAgICBicmVhaw0KICB9DQp9DQoNCmBgYA0KDQoNCg0KDQoNCg0Kbm93IHVzZSB0aGUgZnVuY3Rpb24gdG8gZmluZCBwcmltZSBmYWN0b3JzDQpgYGB7cn0NCg0KZmFjdG9ycyA9IGZ1bmN0aW9uKG4pIHsNCiAgDQogIG1heF9wcmltZXMgPSA1MDANCg0KICBwcmltZXMgPSBwcmltZV9udW1iZXJzKG1heF9wcmltZXMpDQogIA0KICBmY3RycyA9IGMoKQ0KICANCiAgaiA9IDENCiAgDQogIHdoaWxlIChuICE9IDApew0KICANCiAgICBmb3IgKGkgaW4gYyhqOm1heF9wcmltZXMpKSB7DQogICAgICANCiAgICAgIHByaW50KGNhdCgiaSA9ICIsIGksIiwgaiBpcyIsIGosICIsIGZjdHJzIGlzIiwgZmN0cnMpKQ0KICAgICAgDQogICAgICBpZiAobiAlJSBwcmltZXNbaV0gPT0gMCl7DQogICAgDQogICAgICAgIGZjdHJzID0gYyhmY3RycywgcHJpbWVzW2ldKQ0KICAgICAgDQogICAgICAgIG4gPSBuL3ByaW1lc1tpXQ0KICAgICAgICBqID0gaisxDQogICAgDQogICAgICAgIGJyZWFrDQogICAgICB9DQogICAgICANCiAgICAgDQogICAgfQ0KICAgIA0KICAgIA0KICB9DQogIA0KICByZXR1cm4oZmN0cnMpDQp9DQpgYGANCg0KDQo=</div>
 
 
 

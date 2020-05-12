@@ -10,6 +10,14 @@ The prime factors of 13195 are 5, 7, 13 and 29.
 What is the largest prime factor of the number 600851475143 ?
 
 
+
+System:
+
+Step 1 create vector of primes up to 1,000,000
+Step 2 - go through the list of primes, dividing num by each until mod = 0
+Step 3 - Store that number in a vector and update num to the output of the division
+Step 4 - When new_num = 0, return the largest number in the new vector
+
 function to calculate prime numbers upto a given number
 ```{r}
 prime_numbers = function(top) {
@@ -34,6 +42,36 @@ prime_numbers = function(top) {
  }
 
 ```
+
+
+
+```{r}
+num = 13195
+new_num = num
+primes = prime_numbers(num)
+t = length(primes)
+factors = integer()
+p = 1
+
+for (i in 1:t){
+  if (new_num %% primes[i] == 0) {
+    print(cat("adding ", primes[i], " to factors"))
+    factors[p] = primes[i]
+    p = p+1
+    new_num = new_num/primes[i]
+  }
+  if (new_num == 1) {
+    ans = max(factors)
+    print(cat("answer is ", ans))
+    break
+  }
+}
+
+```
+
+
+
+
 
 
 now use the function to find prime factors
