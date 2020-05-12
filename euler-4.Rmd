@@ -9,3 +9,71 @@ Problem 4
 A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 
 Find the largest palindrome made from the product of two 3-digit numbers.
+
+
+Thoughts...
+
+There can't be very many palindromic numbers which are the product of two 3-digit numbers.
+```{r}
+100*100
+a = 100 * 100
+```
+
+```{r}
+999*999
+b = 999*999
+```
+
+```{r}
+b - a
+```
+... possible answers
+
+So what if I start at 999 * 999 and work backwards till I find a palindrome...
+```{r}
+
+for (i in seq(999^2, 100^2)) {
+
+  if (i %% 500 == 0){ print(i)}
+  
+  a = strsplit(as.character(i), "")
+  b = lapply(strsplit(as.character(i), ""), rev)
+  
+  if (all(unlist(a) == unlist(b))){
+    ans = i
+    
+    print(cat(i, " is palindromic"))
+    if (any(q == ans)){
+      return(ans)
+      break
+    }
+    else {print("but not a product of two 3-digit numbers")}
+  }
+}
+
+```
+
+
+
+So that works, but the answer it returns (997799) might not be a product of two 3-digit numbers...
+... how to check that...
+
+
+I could make a list of all product of all numbers and check it off...
+
+(this bit needs to be run before the code above)
+
+```{r}
+q = data.frame()
+
+for (i in c(1:900)) {
+  for (j in c(1:900)) {
+    q[i,j] = (i+99)*(j+99)
+   
+  }
+ 
+}
+```
+
+
+
