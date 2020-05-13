@@ -14,12 +14,11 @@ What is the smallest positive number that is evenly divisible by all of the numb
 
 I thought this was going to be a small number, which was why I tried this method... (got upto 20 million before I stopped it)
 
-Slight cheat by copying this from hackerrank.com
-M is divisible by all numbers from 1 to N iff M is equal to the product of all prime powers p^k where p is prime and divides M, and p < N, and k is the largest integer such that p^k < N. For example, 2520 = 2^3 * 3^2 * 5 * 7.
+Then did some reading on least common multiples
+Least Common multiple
+Nice video here.... https://www.youtube.com/watch?v=z5vlj06Ex0U
 
-Where N = 1:20
-ans = M
-
+First try...
 
 ```{r}
 
@@ -51,8 +50,7 @@ while (a == F){
 
 ```
 
-Least Common multiple
-Nice video here.... https://www.youtube.com/watch?v=z5vlj06Ex0U
+
 
 Requires my prime number function...
 ```{r}
@@ -80,15 +78,53 @@ prime_numbers <- function(num) {
 ```
 
 
+
+-------------
+Slight cheat by copying this from hackerrank.com:
+
+~
+M is divisible by all numbers from 1 to N iff M is equal to the product of all prime powers p^k where p is prime and divides M, and p < N, and k is the largest integer such that p^k < N. For example, 2520 = 2^3 * 3^2 * 5 * 7.
+~
+
+So...
+Where N = largest number in the sequence 1:N
+
+arr = 1:N
+
+k = largest integer such that p^k < N
+ans = M = product.of((prime factors of M>N)^k)
+
+step 1 - list all primes upto N into [p]
+step 2 - find largest integer of each prime where p^k > N into [k]
+step 3 - multiply the pruducts of p[i] * k[i]
+-------------
 ```{r}
 
-arr = seq(1,20)
+N = 20
 
-LCM = function(arr) {
+arr = c(1:N)
+
+p = prime_numbers(N)
+
+k = rep(1, length(p))
+
+
+for (i in 1:length(p)){
   
-  primes = prime_numbers(max(arr))
+  a = 1
   
+  while (p[i]^a < N) {
+    k[i] = a
+    a = a+1
+  }
   
 }
+
+ans = prod(p^k)
+
+## suppress exponential notation with format(result, scientific=F)
+print (format(ans, scientific=FALSE))
+
 ```
+
 

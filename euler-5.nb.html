@@ -1757,6 +1757,8 @@ summary {
 <p>Problem 5 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</p>
 <p>What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</p>
 <p>I thought this was going to be a small number, which was why I tried this method… (got upto 20 million before I stopped it)</p>
+<p>Then did some reading on least common multiples Least Common multiple Nice video here…. <a href="https://www.youtube.com/watch?v=z5vlj06Ex0U" class="uri">https://www.youtube.com/watch?v=z5vlj06Ex0U</a></p>
+<p>First try…</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5sID0gMVxuXG5hID0gRlxuXG53aGlsZSAoYSA9PSBGKXtcblxuICBib29sZWFuID0gcmVwKEYsIDIwKVxuICBcbiAgZm9yIChpIGluIGMoMToyMCkpe1xuICBcbiAgICBpZiAobCAlJSBpID09IDApIHtcbiAgICAgIGJvb2xlYW5baV0gPSBUXG4gICAgfSAgXG4gICAgXG4gIH1cbiAgXG4gIGlmIChhbGwoYm9vbGVhbiA9PSBUKSkge1xuICAgIGFucyA9IGxcbiAgICBhID0gVFxuICAgIHJldHVybihhbnMpXG4gIH1cbiAgXG4gIGlmIChsICUlIDUwMDAgPT0gMCl7cHJpbnQoY2F0KGwsIFwiIFwiLCBib29sZWFuLCBcIiBzdW0gaXMuLi5cIiwgc3VtKGJvb2xlYW4pKSl9XG4gIGwgPSBsKzFcbn1cblxuYGBgIn0= -->
@@ -1790,7 +1792,6 @@ while (a == F){
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Least Common multiple Nice video here…. <a href="https://www.youtube.com/watch?v=z5vlj06Ex0U" class="uri">https://www.youtube.com/watch?v=z5vlj06Ex0U</a></p>
 <p>Requires my prime number function…</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -1819,24 +1820,66 @@ prime_numbers &lt;- function(num) {
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<table style="width:19%;">
+<colgroup>
+<col width="19%"></col>
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Slight cheat by copying this from hackerrank.com:</td>
+</tr>
+<tr class="even">
+<td>~ M is divisible by all numbers from 1 to N iff M is equal to the product of all prime powers p^k where p is prime and divides M, and p &lt; N, and k is the largest integer such that p^k &lt; N. For example, 2520 = 2^3 * 3^2 * 5 * 7. ~</td>
+</tr>
+<tr class="odd">
+<td>So… Where N = largest number in the sequence 1:N</td>
+</tr>
+<tr class="even">
+<td>arr = 1:N</td>
+</tr>
+<tr class="odd">
+<td>k = largest integer such that p^k &lt; N ans = M = product.of((prime factors of M&gt;N)^k)</td>
+</tr>
+<tr class="even">
+<td>step 1 - list all primes upto N into [p] step 2 - find largest integer of each prime where p^k &gt; N into [k] step 3 - multiply the pruducts of p[i] * k[i]</td>
+</tr>
+</tbody>
+</table>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5hcnIgPSBzZXEoMSwyMClcblxuTENNID0gZnVuY3Rpb24oYXJyKSB7XG4gIFxuICBwcmltZXMgPSBwcmltZV9udW1iZXJzKG1heChhcnIpKVxuICBcbiAgXG59XG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5OID0gMjBcblxuYXJyID0gYygxOk4pXG5cbnAgPSBwcmltZV9udW1iZXJzKE4pXG5cbmsgPSByZXAoMSwgbGVuZ3RoKHApKVxuXG5cbmZvciAoaSBpbiAxOmxlbmd0aChwKSl7XG4gIFxuICBhID0gMVxuICBcbiAgd2hpbGUgKHBbaV1eYSA8IE4pIHtcbiAgICBrW2ldID0gYVxuICAgIGEgPSBhKzFcbiAgfVxuICBcbn1cblxuYW5zID0gcHJvZChwXmspXG5cbiMjIHN1cHByZXNzIGV4cG9uZW50aWFsIG5vdGF0aW9uIHdpdGggZm9ybWF0KHJlc3VsdCwgc2NpZW50aWZpYz1GKVxucHJpbnQgKGZvcm1hdChhbnMsIHNjaWVudGlmaWM9RkFMU0UpKVxuXG5gYGAifQ== -->
 <pre class="r"><code>
-arr = seq(1,20)
+N = 20
 
-LCM = function(arr) {
+arr = c(1:N)
+
+p = prime_numbers(N)
+
+k = rep(1, length(p))
+
+
+for (i in 1:length(p)){
   
-  primes = prime_numbers(max(arr))
+  a = 1
   
+  while (p[i]^a &lt; N) {
+    k[i] = a
+    a = a+1
+  }
   
-}</code></pre>
+}
+
+ans = prod(p^k)
+
+## suppress exponential notation with format(result, scientific=F)
+print (format(ans, scientific=FALSE))
+</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KU21hbGxlc3QgbXVsdGlwbGUNCmBgYHtyfQ0KDQpgYGANCiAgDQpQcm9ibGVtIDUNCjI1MjAgaXMgdGhlIHNtYWxsZXN0IG51bWJlciB0aGF0IGNhbiBiZSBkaXZpZGVkIGJ5IGVhY2ggb2YgdGhlIG51bWJlcnMgZnJvbSAxIHRvIDEwIHdpdGhvdXQgYW55IHJlbWFpbmRlci4NCg0KV2hhdCBpcyB0aGUgc21hbGxlc3QgcG9zaXRpdmUgbnVtYmVyIHRoYXQgaXMgZXZlbmx5IGRpdmlzaWJsZSBieSBhbGwgb2YgdGhlIG51bWJlcnMgZnJvbSAxIHRvIDIwPw0KDQpJIHRob3VnaHQgdGhpcyB3YXMgZ29pbmcgdG8gYmUgYSBzbWFsbCBudW1iZXIsIHdoaWNoIHdhcyB3aHkgSSB0cmllZCB0aGlzIG1ldGhvZC4uLiAoZ290IHVwdG8gMjAgbWlsbGlvbiBiZWZvcmUgSSBzdG9wcGVkIGl0KQ0KDQpgYGB7cn0NCg0KbCA9IDENCg0KYSA9IEYNCg0Kd2hpbGUgKGEgPT0gRil7DQoNCiAgYm9vbGVhbiA9IHJlcChGLCAyMCkNCiAgDQogIGZvciAoaSBpbiBjKDE6MjApKXsNCiAgDQogICAgaWYgKGwgJSUgaSA9PSAwKSB7DQogICAgICBib29sZWFuW2ldID0gVA0KICAgIH0gIA0KICAgIA0KICB9DQogIA0KICBpZiAoYWxsKGJvb2xlYW4gPT0gVCkpIHsNCiAgICBhbnMgPSBsDQogICAgYSA9IFQNCiAgICByZXR1cm4oYW5zKQ0KICB9DQogIA0KICBpZiAobCAlJSA1MDAwID09IDApe3ByaW50KGNhdChsLCAiICIsIGJvb2xlYW4sICIgc3VtIGlzLi4uIiwgc3VtKGJvb2xlYW4pKSl9DQogIGwgPSBsKzENCn0NCg0KYGBgDQoNCkxlYXN0IENvbW1vbiBtdWx0aXBsZQ0KTmljZSB2aWRlbyBoZXJlLi4uLiBodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PXo1dmxqMDZFeDBVDQoNClJlcXVpcmVzIG15IHByaW1lIG51bWJlciBmdW5jdGlvbi4uLg0KYGBge3J9DQoNCnByaW1lX251bWJlcnMgPC0gZnVuY3Rpb24obnVtKSB7DQogIA0KICBpZiAobnVtIDwgMikgcmV0dXJuKE5VTEwpDQogIA0KICBwcmltZXNfYm9vbGVhbiA8LSByZXAoVCwgbnVtKQ0KICANCiAgcHJpbWVzX2Jvb2xlYW5bMV0gPC0gRg0KICANCiAgZm9yKGkgaW4gc2VxKG51bSkpIHsNCiAgIA0KICAgICBpZiAocHJpbWVzX2Jvb2xlYW5baV0pIHsNCiAgICAgIA0KICAgICAgIGlfc3EgPC0gaSAqIGkNCiAgICAgICANCiAgICAgIGlmIChpX3NxID4gbnVtKSByZXR1cm4od2hpY2gocHJpbWVzX2Jvb2xlYW4pKQ0KICAgICAgDQogICAgICAgcHJpbWVzX2Jvb2xlYW5bc2VxKGlfc3EsIG51bSwgYnk9aSldIDwtIEZBTFNFDQogICAgfQ0KICB9DQp9DQpgYGANCg0KDQpgYGB7cn0NCg0KYXJyID0gc2VxKDEsMjApDQoNCkxDTSA9IGZ1bmN0aW9uKGFycikgew0KICANCiAgcHJpbWVzID0gcHJpbWVfbnVtYmVycyhtYXgoYXJyKSkNCiAgDQogIA0KfQ0KYGBgDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KU21hbGxlc3QgbXVsdGlwbGUNCmBgYHtyfQ0KDQpgYGANCiAgDQpQcm9ibGVtIDUNCjI1MjAgaXMgdGhlIHNtYWxsZXN0IG51bWJlciB0aGF0IGNhbiBiZSBkaXZpZGVkIGJ5IGVhY2ggb2YgdGhlIG51bWJlcnMgZnJvbSAxIHRvIDEwIHdpdGhvdXQgYW55IHJlbWFpbmRlci4NCg0KV2hhdCBpcyB0aGUgc21hbGxlc3QgcG9zaXRpdmUgbnVtYmVyIHRoYXQgaXMgZXZlbmx5IGRpdmlzaWJsZSBieSBhbGwgb2YgdGhlIG51bWJlcnMgZnJvbSAxIHRvIDIwPw0KDQpJIHRob3VnaHQgdGhpcyB3YXMgZ29pbmcgdG8gYmUgYSBzbWFsbCBudW1iZXIsIHdoaWNoIHdhcyB3aHkgSSB0cmllZCB0aGlzIG1ldGhvZC4uLiAoZ290IHVwdG8gMjAgbWlsbGlvbiBiZWZvcmUgSSBzdG9wcGVkIGl0KQ0KDQpUaGVuIGRpZCBzb21lIHJlYWRpbmcgb24gbGVhc3QgY29tbW9uIG11bHRpcGxlcw0KTGVhc3QgQ29tbW9uIG11bHRpcGxlDQpOaWNlIHZpZGVvIGhlcmUuLi4uIGh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9ejV2bGowNkV4MFUNCg0KRmlyc3QgdHJ5Li4uDQoNCmBgYHtyfQ0KDQpsID0gMQ0KDQphID0gRg0KDQp3aGlsZSAoYSA9PSBGKXsNCg0KICBib29sZWFuID0gcmVwKEYsIDIwKQ0KICANCiAgZm9yIChpIGluIGMoMToyMCkpew0KICANCiAgICBpZiAobCAlJSBpID09IDApIHsNCiAgICAgIGJvb2xlYW5baV0gPSBUDQogICAgfSAgDQogICAgDQogIH0NCiAgDQogIGlmIChhbGwoYm9vbGVhbiA9PSBUKSkgew0KICAgIGFucyA9IGwNCiAgICBhID0gVA0KICAgIHJldHVybihhbnMpDQogIH0NCiAgDQogIGlmIChsICUlIDUwMDAgPT0gMCl7cHJpbnQoY2F0KGwsICIgIiwgYm9vbGVhbiwgIiBzdW0gaXMuLi4iLCBzdW0oYm9vbGVhbikpKX0NCiAgbCA9IGwrMQ0KfQ0KDQpgYGANCg0KDQoNClJlcXVpcmVzIG15IHByaW1lIG51bWJlciBmdW5jdGlvbi4uLg0KYGBge3J9DQoNCnByaW1lX251bWJlcnMgPC0gZnVuY3Rpb24obnVtKSB7DQogIA0KICBpZiAobnVtIDwgMikgcmV0dXJuKE5VTEwpDQogIA0KICBwcmltZXNfYm9vbGVhbiA8LSByZXAoVCwgbnVtKQ0KICANCiAgcHJpbWVzX2Jvb2xlYW5bMV0gPC0gRg0KICANCiAgZm9yKGkgaW4gc2VxKG51bSkpIHsNCiAgIA0KICAgICBpZiAocHJpbWVzX2Jvb2xlYW5baV0pIHsNCiAgICAgIA0KICAgICAgIGlfc3EgPC0gaSAqIGkNCiAgICAgICANCiAgICAgIGlmIChpX3NxID4gbnVtKSByZXR1cm4od2hpY2gocHJpbWVzX2Jvb2xlYW4pKQ0KICAgICAgDQogICAgICAgcHJpbWVzX2Jvb2xlYW5bc2VxKGlfc3EsIG51bSwgYnk9aSldIDwtIEZBTFNFDQogICAgfQ0KICB9DQp9DQpgYGANCg0KDQoNCi0tLS0tLS0tLS0tLS0NClNsaWdodCBjaGVhdCBieSBjb3B5aW5nIHRoaXMgZnJvbSBoYWNrZXJyYW5rLmNvbToNCg0Kfg0KTSBpcyBkaXZpc2libGUgYnkgYWxsIG51bWJlcnMgZnJvbSAxIHRvIE4gaWZmIE0gaXMgZXF1YWwgdG8gdGhlIHByb2R1Y3Qgb2YgYWxsIHByaW1lIHBvd2VycyBwXmsgd2hlcmUgcCBpcyBwcmltZSBhbmQgZGl2aWRlcyBNLCBhbmQgcCA8IE4sIGFuZCBrIGlzIHRoZSBsYXJnZXN0IGludGVnZXIgc3VjaCB0aGF0IHBeayA8IE4uIEZvciBleGFtcGxlLCAyNTIwID0gMl4zICogM14yICogNSAqIDcuDQp+DQoNClNvLi4uDQpXaGVyZSBOID0gbGFyZ2VzdCBudW1iZXIgaW4gdGhlIHNlcXVlbmNlIDE6Tg0KDQphcnIgPSAxOk4NCg0KayA9IGxhcmdlc3QgaW50ZWdlciBzdWNoIHRoYXQgcF5rIDwgTg0KYW5zID0gTSA9IHByb2R1Y3Qub2YoKHByaW1lIGZhY3RvcnMgb2YgTT5OKV5rKQ0KDQpzdGVwIDEgLSBsaXN0IGFsbCBwcmltZXMgdXB0byBOIGludG8gW3BdDQpzdGVwIDIgLSBmaW5kIGxhcmdlc3QgaW50ZWdlciBvZiBlYWNoIHByaW1lIHdoZXJlIHBeayA+IE4gaW50byBba10NCnN0ZXAgMyAtIG11bHRpcGx5IHRoZSBwcnVkdWN0cyBvZiBwW2ldICoga1tpXQ0KLS0tLS0tLS0tLS0tLQ0KYGBge3J9DQoNCk4gPSAyMA0KDQphcnIgPSBjKDE6TikNCg0KcCA9IHByaW1lX251bWJlcnMoTikNCg0KayA9IHJlcCgxLCBsZW5ndGgocCkpDQoNCg0KZm9yIChpIGluIDE6bGVuZ3RoKHApKXsNCiAgDQogIGEgPSAxDQogIA0KICB3aGlsZSAocFtpXV5hIDwgTikgew0KICAgIGtbaV0gPSBhDQogICAgYSA9IGErMQ0KICB9DQogIA0KfQ0KDQphbnMgPSBwcm9kKHBeaykNCg0KIyMgc3VwcHJlc3MgZXhwb25lbnRpYWwgbm90YXRpb24gd2l0aCBmb3JtYXQocmVzdWx0LCBzY2llbnRpZmljPUYpDQpwcmludCAoZm9ybWF0KGFucywgc2NpZW50aWZpYz1GQUxTRSkpDQoNCmBgYA0KDQoNCg==</div>
 
 
 
