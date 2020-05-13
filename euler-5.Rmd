@@ -3,8 +3,92 @@ title: "R Notebook"
 output: html_notebook
 ---
 Smallest multiple
+```{r}
+
+```
   
 Problem 5
 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
 
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+I thought this was going to be a small number, which was why I tried this method... (got upto 20 million before I stopped it)
+
+Slight cheat by copying this from hackerrank.com
+M is divisible by all numbers from 1 to N iff M is equal to the product of all prime powers p^k where p is prime and divides M, and p < N, and k is the largest integer such that p^k < N. For example, 2520 = 2^3 * 3^2 * 5 * 7.
+
+Where N = 1:20
+ans = M
+
+
+```{r}
+
+l = 1
+
+a = F
+
+while (a == F){
+
+  boolean = rep(F, 20)
+  
+  for (i in c(1:20)){
+  
+    if (l %% i == 0) {
+      boolean[i] = T
+    }  
+    
+  }
+  
+  if (all(boolean == T)) {
+    ans = l
+    a = T
+    return(ans)
+  }
+  
+  if (l %% 5000 == 0){print(cat(l, " ", boolean, " sum is...", sum(boolean)))}
+  l = l+1
+}
+
+```
+
+Least Common multiple
+Nice video here.... https://www.youtube.com/watch?v=z5vlj06Ex0U
+
+Requires my prime number function...
+```{r}
+
+prime_numbers <- function(num) {
+  
+  if (num < 2) return(NULL)
+  
+  primes_boolean <- rep(T, num)
+  
+  primes_boolean[1] <- F
+  
+  for(i in seq(num)) {
+   
+     if (primes_boolean[i]) {
+      
+       i_sq <- i * i
+       
+      if (i_sq > num) return(which(primes_boolean))
+      
+       primes_boolean[seq(i_sq, num, by=i)] <- FALSE
+    }
+  }
+}
+```
+
+
+```{r}
+
+arr = seq(1,20)
+
+LCM = function(arr) {
+  
+  primes = prime_numbers(max(arr))
+  
+  
+}
+```
+

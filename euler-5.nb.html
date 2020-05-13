@@ -1750,11 +1750,93 @@ summary {
 
 <!-- rnb-text-begin -->
 <p>Smallest multiple</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <p>Problem 5 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</p>
 <p>What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</p>
+<p>I thought this was going to be a small number, which was why I tried this method… (got upto 20 million before I stopped it)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5sID0gMVxuXG5hID0gRlxuXG53aGlsZSAoYSA9PSBGKXtcblxuICBib29sZWFuID0gcmVwKEYsIDIwKVxuICBcbiAgZm9yIChpIGluIGMoMToyMCkpe1xuICBcbiAgICBpZiAobCAlJSBpID09IDApIHtcbiAgICAgIGJvb2xlYW5baV0gPSBUXG4gICAgfSAgXG4gICAgXG4gIH1cbiAgXG4gIGlmIChhbGwoYm9vbGVhbiA9PSBUKSkge1xuICAgIGFucyA9IGxcbiAgICBhID0gVFxuICAgIHJldHVybihhbnMpXG4gIH1cbiAgXG4gIGlmIChsICUlIDUwMDAgPT0gMCl7cHJpbnQoY2F0KGwsIFwiIFwiLCBib29sZWFuLCBcIiBzdW0gaXMuLi5cIiwgc3VtKGJvb2xlYW4pKSl9XG4gIGwgPSBsKzFcbn1cblxuYGBgIn0= -->
+<pre class="r"><code>
+l = 1
+
+a = F
+
+while (a == F){
+
+  boolean = rep(F, 20)
+  
+  for (i in c(1:20)){
+  
+    if (l %% i == 0) {
+      boolean[i] = T
+    }  
+    
+  }
+  
+  if (all(boolean == T)) {
+    ans = l
+    a = T
+    return(ans)
+  }
+  
+  if (l %% 5000 == 0){print(cat(l, &quot; &quot;, boolean, &quot; sum is...&quot;, sum(boolean)))}
+  l = l+1
+}
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Least Common multiple Nice video here…. <a href="https://www.youtube.com/watch?v=z5vlj06Ex0U" class="uri">https://www.youtube.com/watch?v=z5vlj06Ex0U</a></p>
+<p>Requires my prime number function…</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5wcmltZV9udW1iZXJzIDwtIGZ1bmN0aW9uKG51bSkge1xuICBcbiAgaWYgKG51bSA8IDIpIHJldHVybihOVUxMKVxuICBcbiAgcHJpbWVzX2Jvb2xlYW4gPC0gcmVwKFQsIG51bSlcbiAgXG4gIHByaW1lc19ib29sZWFuWzFdIDwtIEZcbiAgXG4gIGZvcihpIGluIHNlcShudW0pKSB7XG4gICBcbiAgICAgaWYgKHByaW1lc19ib29sZWFuW2ldKSB7XG4gICAgICBcbiAgICAgICBpX3NxIDwtIGkgKiBpXG4gICAgICAgXG4gICAgICBpZiAoaV9zcSA+IG51bSkgcmV0dXJuKHdoaWNoKHByaW1lc19ib29sZWFuKSlcbiAgICAgIFxuICAgICAgIHByaW1lc19ib29sZWFuW3NlcShpX3NxLCBudW0sIGJ5PWkpXSA8LSBGQUxTRVxuICAgIH1cbiAgfVxufVxuYGBgIn0= -->
+<pre class="r"><code>
+prime_numbers &lt;- function(num) {
+  
+  if (num &lt; 2) return(NULL)
+  
+  primes_boolean &lt;- rep(T, num)
+  
+  primes_boolean[1] &lt;- F
+  
+  for(i in seq(num)) {
+   
+     if (primes_boolean[i]) {
+      
+       i_sq &lt;- i * i
+       
+      if (i_sq &gt; num) return(which(primes_boolean))
+      
+       primes_boolean[seq(i_sq, num, by=i)] &lt;- FALSE
+    }
+  }
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5hcnIgPSBzZXEoMSwyMClcblxuTENNID0gZnVuY3Rpb24oYXJyKSB7XG4gIFxuICBwcmltZXMgPSBwcmltZV9udW1iZXJzKG1heChhcnIpKVxuICBcbiAgXG59XG5gYGAifQ== -->
+<pre class="r"><code>
+arr = seq(1,20)
+
+LCM = function(arr) {
+  
+  primes = prime_numbers(max(arr))
+  
+  
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KU21hbGxlc3QgbXVsdGlwbGUNCiAgDQpQcm9ibGVtIDUNCjI1MjAgaXMgdGhlIHNtYWxsZXN0IG51bWJlciB0aGF0IGNhbiBiZSBkaXZpZGVkIGJ5IGVhY2ggb2YgdGhlIG51bWJlcnMgZnJvbSAxIHRvIDEwIHdpdGhvdXQgYW55IHJlbWFpbmRlci4NCg0KV2hhdCBpcyB0aGUgc21hbGxlc3QgcG9zaXRpdmUgbnVtYmVyIHRoYXQgaXMgZXZlbmx5IGRpdmlzaWJsZSBieSBhbGwgb2YgdGhlIG51bWJlcnMgZnJvbSAxIHRvIDIwPw==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KU21hbGxlc3QgbXVsdGlwbGUNCmBgYHtyfQ0KDQpgYGANCiAgDQpQcm9ibGVtIDUNCjI1MjAgaXMgdGhlIHNtYWxsZXN0IG51bWJlciB0aGF0IGNhbiBiZSBkaXZpZGVkIGJ5IGVhY2ggb2YgdGhlIG51bWJlcnMgZnJvbSAxIHRvIDEwIHdpdGhvdXQgYW55IHJlbWFpbmRlci4NCg0KV2hhdCBpcyB0aGUgc21hbGxlc3QgcG9zaXRpdmUgbnVtYmVyIHRoYXQgaXMgZXZlbmx5IGRpdmlzaWJsZSBieSBhbGwgb2YgdGhlIG51bWJlcnMgZnJvbSAxIHRvIDIwPw0KDQpJIHRob3VnaHQgdGhpcyB3YXMgZ29pbmcgdG8gYmUgYSBzbWFsbCBudW1iZXIsIHdoaWNoIHdhcyB3aHkgSSB0cmllZCB0aGlzIG1ldGhvZC4uLiAoZ290IHVwdG8gMjAgbWlsbGlvbiBiZWZvcmUgSSBzdG9wcGVkIGl0KQ0KDQpgYGB7cn0NCg0KbCA9IDENCg0KYSA9IEYNCg0Kd2hpbGUgKGEgPT0gRil7DQoNCiAgYm9vbGVhbiA9IHJlcChGLCAyMCkNCiAgDQogIGZvciAoaSBpbiBjKDE6MjApKXsNCiAgDQogICAgaWYgKGwgJSUgaSA9PSAwKSB7DQogICAgICBib29sZWFuW2ldID0gVA0KICAgIH0gIA0KICAgIA0KICB9DQogIA0KICBpZiAoYWxsKGJvb2xlYW4gPT0gVCkpIHsNCiAgICBhbnMgPSBsDQogICAgYSA9IFQNCiAgICByZXR1cm4oYW5zKQ0KICB9DQogIA0KICBpZiAobCAlJSA1MDAwID09IDApe3ByaW50KGNhdChsLCAiICIsIGJvb2xlYW4sICIgc3VtIGlzLi4uIiwgc3VtKGJvb2xlYW4pKSl9DQogIGwgPSBsKzENCn0NCg0KYGBgDQoNCkxlYXN0IENvbW1vbiBtdWx0aXBsZQ0KTmljZSB2aWRlbyBoZXJlLi4uLiBodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PXo1dmxqMDZFeDBVDQoNClJlcXVpcmVzIG15IHByaW1lIG51bWJlciBmdW5jdGlvbi4uLg0KYGBge3J9DQoNCnByaW1lX251bWJlcnMgPC0gZnVuY3Rpb24obnVtKSB7DQogIA0KICBpZiAobnVtIDwgMikgcmV0dXJuKE5VTEwpDQogIA0KICBwcmltZXNfYm9vbGVhbiA8LSByZXAoVCwgbnVtKQ0KICANCiAgcHJpbWVzX2Jvb2xlYW5bMV0gPC0gRg0KICANCiAgZm9yKGkgaW4gc2VxKG51bSkpIHsNCiAgIA0KICAgICBpZiAocHJpbWVzX2Jvb2xlYW5baV0pIHsNCiAgICAgIA0KICAgICAgIGlfc3EgPC0gaSAqIGkNCiAgICAgICANCiAgICAgIGlmIChpX3NxID4gbnVtKSByZXR1cm4od2hpY2gocHJpbWVzX2Jvb2xlYW4pKQ0KICAgICAgDQogICAgICAgcHJpbWVzX2Jvb2xlYW5bc2VxKGlfc3EsIG51bSwgYnk9aSldIDwtIEZBTFNFDQogICAgfQ0KICB9DQp9DQpgYGANCg0KDQpgYGB7cn0NCg0KYXJyID0gc2VxKDEsMjApDQoNCkxDTSA9IGZ1bmN0aW9uKGFycikgew0KICANCiAgcHJpbWVzID0gcHJpbWVfbnVtYmVycyhtYXgoYXJyKSkNCiAgDQogIA0KfQ0KYGBgDQoNCg==</div>
 
 
 
