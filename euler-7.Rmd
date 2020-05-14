@@ -66,8 +66,9 @@ From stackexchange...
 
 we have the following asymptotic bound on the nth prime pn:
 
-n ln n + n(ln ln n − 1) < pn < n ln n + n ln ln n for n≥6
+n ln n + n(ln ln n − 1) < pn < n ln n + n ln ln n for n ≥ 6
 
+So we know roughly where it is, but that's not very helpful...
 
 ```{r}
 n = 10000
@@ -78,3 +79,132 @@ diff(c(upper1, lower2))
 
 ```
 
+
+
+Another approach is to store all primes upto N by iterating through all the integers <N
+
+Only need to divide each one by the primes already in the list
+
+And only odd numbers
+
+Starting at 3
+
+(but it's not 'upto N' because that doesn't give us the Nth prime)
+
+So changed now to keep iterating until lenth of primes = N
+
+Buut... still takes a loooong time
+
+So maybe should use the limits above to shorten time
+
+```{r}
+
+primes2 = function(n){
+  ## define bounds for the nth prime
+  lower = n * log(n) * n + n * (log(log(n)) - 1)
+  upper = n * log(n) * n + n * log(log(n))
+  
+  ##check that the bounds don't overlap with previous or next prime
+  prev = n-1
+  prev_upper = prev * log(prev) * prev + prev * log(log(prev))
+  nxt = n+1
+  nxt_lower = nxt * log(nxt) * nxt + nxt * (log(log(nxt)) - 1)
+  if (lower<prev_upper){return("overlap with previous window")}
+  if (upper>nxt_lower){return("overlap with next window")}
+  
+  ## use the sqrt of the upper bound as upper limit for calculating primes to be used as factors
+  sqrt_upper = sqrt(upper)
+  
+  ## make list of primes upto sqrt_upper
+  primes = c(2,3)
+  i = 5
+  while(length(primes)<sqrt_upper){
+    if (all(i %% primes != 0)){
+      primes = c(primes,i)
+      print(cat("adding ", i, " to primes"))
+    }
+    i = i+2 
+    print(i)
+  }
+  
+  ## then use modified version of my old primes() format to calculate primes between lower and upper (should only be one) 
+  
+  lower = floor(lower)
+  upper = ceiling(upper)
+  arr = c(lower:upper)
+  
+  arr_boolean <- rep(T, diff(c(lower, upper)))
+  
+  for(i in arr) {
+   
+    if (arr_boolean[i]) {
+      j = lower + i
+       
+      if (j > upper){ return(arr[which(arr_boolean)])}
+      
+      else if (any(arr[i] %% primes == 0)) {arr_boolean[i] <- FALSE}
+    }
+  }
+
+  
+}
+
+
+N = 10001
+primes2(N)
+
+
+```
+
+Ok this system is stupid... I'm currently calculating ALL primes upto sqrt(upper), when i shoudl be generating the next (smallest) prime
+and marking all numbers in the array that are divisible as false
+
+steps
+step1 - generate list from lower to upper [list = 10:20]
+step4 - start a list of primes p, starting with 2
+step3 - generate boolean index from lower to upper [boo = T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T]
+step4 - define q as the last element in primes + 1
+step4 - mark all boolean's with an index greater than [lower] and where it's index plus [lower] is divisible by q, as false
+step - find next prime and add it to p
+    while tail(primes) is less than sqrt(upper),
+      q = tail(primes)+1
+      if all(q %% primes ==0){ primes = c(primes,q) }
+      break the while
+      
+      
+```{r}
+nth_prime = function(n){
+
+  ## start my list of primes
+  primes = c(2)
+  
+  ## Wilson's theorem to set boundaries for nth prime (and round them with floor/ceiling)
+  lower = floor(n * (log(n) + log(log(n)) - 1))
+  upper = ceiling(n * (log(n) + log(log(n))))
+  
+  arr = c(lower:upper)
+  
+  boo = rep(T, length(arr))
+  
+  while (tail(primes,1) < upper){
+  
+    ## make elements of boo corresponding to elements of arr that are divisible by q as false
+    boo[which(arr %% tail(primes, 1) == 0)] = FALSE
+  
+    ## next potential prime
+    q = tail(primes, 1) + 1
+  
+    ## check if it's prime
+    while(T){
+      if (all(q %% primes != 0)){ 
+        primes = c(primes, q)
+        break
+        }
+      else q = q + 1
+    }
+  }
+return(arr[boo])
+}
+```
+      
+      
