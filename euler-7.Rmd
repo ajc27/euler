@@ -187,18 +187,22 @@ nth_prime = function(n){
   boo = rep(T, length(arr))
   
   while (tail(primes,1) < upper){
+    
+    if(sum(boo) == 1){break}
   
     ## make elements of boo corresponding to elements of arr that are divisible by q as false
-    boo[which(arr %% tail(primes, 1) == 0)] = FALSE
+    boo[which(arr %% tail(primes, 1) == 0 & arr != tail(primes,1))] = FALSE
   
     ## next potential prime
     q = tail(primes, 1) + 1
+  
+    ## cat("\n", "q = ", q, ", list of primes = ", primes, "\n", arr[boo])
   
     ## check if it's prime
     while(T){
       if (all(q %% primes != 0)){ 
         primes = c(primes, q)
-        break
+      break
         }
       else q = q + 1
     }
@@ -207,4 +211,31 @@ return(arr[boo])
 }
 ```
       
+
+
+So this code above does work, but it returns all the primes within the bounds, and no easy way to tell which is the nth
+
+I could just use the last while statement to make an array of all the primes up to n...
+
+```{r}
+  
+nth = function(n){
+  primes = c(2,3)
+  q = 5
+  while(length(primes)<n){
+      if (all(q %% primes != 0)){ 
+        primes = c(primes, q)
+      }
       
+      ## add two to check the next odd number
+      q = q + 2
+  }
+  return(tail(primes, 1))
+}
+
+## since read that I can speed this up by setting the upper limit of the test for prime to be the sqrt of the prime candidate, so for q = 100, use if(all(q %% primes[1:10] != -))... or something like that
+```
+
+
+Well that worked... not sure it's the fastest but only took a few seconds for n = 10001
+
