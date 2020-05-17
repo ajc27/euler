@@ -1,0 +1,93 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+Special Pythagorean triplet
+
+Problem 9
+A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+
+a2 + b2 = c2
+For example, 32 + 42 = 9 + 16 = 25 = 52.
+
+There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+Find the product abc.
+---
+
+```{r}
+
+
+  # This ain't riight...
+  # a + b + c = 1000
+  # 
+  # a^2 + b^2 + c^2 = 1000^2
+  # 
+  # 1000^2 = 1000000
+  # 
+  # a^2 + b^2 = c^2
+  # 
+  # so 
+  # 
+  # c^2 = 1000000/2 = 500000
+  # 
+  # c = sqrt(500000)
+  # 
+  # a^2 + b^2 = 500000
+  # 
+  # a + b = sqrt(500000) = 707.1068
+
+
+
+(a + b + c)^2 = 1000000
+  # which is not the same as a^2 + b^2 + c^2
+(a + b + c)*(a + b + c) = 1000000
+  # so
+a + b + c = (1000000/(a + b + c))
+  # sooo...
+a^2 + b^2 + c^2 = (1000000/(a + b + c)) + (a*(a-1)) + (b*(b-1)) + (c*(c-1))
+
+c^2 = ((1000000/(a + b + c)) + (a*(a-1)) + (b*(b-1)) + (c*(c-1)) / 2)
+
+c = sqrt(((1000000/(a + b + c)) + (a*(a-1)) + (b*(b-1)) + (c*(c-1)) / 2))
+  # I don't think this helps!!!
+
+### test example...
+a = 2
+b=4
+c = 6
+
+b^2+c+a
+
+```
+You can generate pythag triples with:
+
+a = m^2 - n^2
+b = 2nm
+c = n^2 + m^2
+where n and m are positive integers and m > n
+
+in that case...
+x = (m^2 - n^2) + (2mn) + (n^2 + m^2) = 1000
+
+
+
+```{r}
+x = 1000
+
+for (m in 1:x){
+  for (n in 1:x){
+    if ((m^2 - n^2) + (2*m*n) + (n^2 + m^2) == x){
+      a = m^2 - n^2
+      b = 2*n*m
+      c = n^2 + m^2
+      cat("\n", "a = ", a, ", b = ", b, ", c = ", c)
+      break
+    }
+    
+  }
+}
+
+ans = a*b*c
+cat("\n", ans)
+```
+

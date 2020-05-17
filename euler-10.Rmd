@@ -1,0 +1,44 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+Summation of primes
+  
+Problem 10
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+
+Find the sum of all the primes below two million.
+---
+Taken from my primes function for euler 7...
+
+```{r}
+sum_nth = function(n){
+  primes = c(2,3) # array of primes
+  q = 5           # next candidate to be checked for primacy
+  while(q<n){
+      if (all(q %% primes[1:sqrt(q)] != 0)){ 
+        primes = c(primes, q)
+        # cat("\n", "q is: ", q, "\n", "primes looks like: ", head(primes, 5), "... ", tail(primes, 5), "\n", "sum is: ", sum)
+      }
+      
+      # add two to check the next odd number
+      q = q + 2
+  }
+  return(sum(primes))
+}
+
+
+
+```
+It had the comment - ## since read that I can speed this up by setting the upper limit of the test for prime to be the sqrt of the prime candidate, so for q = 100, use if(all(q %% primes[1:10] != -))... or something like that
+
+
+So I've added the limit upto the sqrt of q, and added the sum variable which gets returned instead of the nth prime
+Also changed it from checking the length of primes (which returns the sum upto the nth prime), to check whether q is less than n, which 
+returns the sum of the primes less than n
+
+Correct!
+
+But, quite slow. Took a good 10-15 seconds.
+
+Realise it should be quicker to sum once at the end, outside the loop. Have tried this, but if anything it's slower, maybe a minute
