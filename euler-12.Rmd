@@ -28,17 +28,259 @@ Ok so what's the relationship between nth trianglular number and number of facto
 
 Could loop, incrementally add one to the list of triangular numbers, and check the number of divisors...
 
+number of factors can be found be using prime factorisation (take code from earlier notebook?), and then using :
+
+N = Xa × Yb × Zc
+
+Num of prime factros = (a+1)(b+1)(c+1)
+
+where N is the number to be factorised, X, Y and Z are the prime numbers and a, b and c are their respective powers.
+
+
+Steps
+-----
+
+1. Find next triangular number (t)
+2. Calculate primes upto sqrt of t (use a while?)
+3. Prime factorisation of t, using vecotr of primes
+Find  Num of factors with = (a+1)(b+1)(c+1)
+if num of factors = >500, return t
+
+
 ```{r}
-tri = c(1)
-n_divs = 1
 
-n_divs = function(n)
 
-while (n_divs < 500){
-  i = 1
+
+# prime factors function
+pr_fac = function(n) {
+  x = c() # array of prime factors
+  r = n # remainder
+  i = 2 # index
   
-  n_divs = n_divs(tail(tri, 1))
-  
+  while (r > 1) { # while remainder is greater than 0
+    
+    if (r %% i == 0) { # if remainder is divisble by i
+      
+      x = c(x,i) # add i to the prime factors vector
+      r = r/i # update remainder
+      i = 1 # reset i to 1 (will get 1 more added below)
+      
+    }
+    
+    i = i + 1
+    
+  }
+  return(x)
 }
+
+# function to find the numebr of factors (inc non-primes)
+factors = function(n){
+
+  prime_factors = pr_fac(n) # uses function pr_fac to return vector of prime factors (may include duplicates)
+ 
+  tbl = table(prime_factors) # make a frequency table of prime factors (elements are the count of each prime, so are equivalent to the exponents)
+
+  exponents = as.vector(tbl) # extract the exponents
+ 
+  n_factors = prod(exponents + 1) # Num of prime factors = (a+1)(b+1)(c+1)
+
+  return(n_factors)
+}
+
+# loop through triangle numbers until f > 500
+t = 1
+i = 1
+f = 0
+
+while (f < 500){
+  i = i + 1
+  t = t + i
+  f = factors(t)
+}
+
+t
+
 ```
 
+
+
+
+-----
+Prime numbers upto N function from euler 3 
+
+```{r}
+
+
+
+# prime_numbers
+# returns a vector of all primes less than n
+
+prime_numbers <- function(n) {
+  
+  if (n < 2) return(NULL)
+  
+  primes_boolean <- rep(T, n)
+  
+  primes_boolean[1] <- F
+  
+  for(i in seq(n)) {
+   
+     if (primes_boolean[i]) {
+      
+       i_sq <- i * i
+       
+      if (i_sq > n) return(which(primes_boolean))
+      
+       primes_boolean[seq(i_sq, n, by=i)] <- FALSE
+    }
+  }
+}
+
+
+# sum_nth
+# returns the sum of primes upto nth prime
+
+sum_nth = function(n){
+  primes = c(2,3) # array of primes
+  q = 5           # next candidate to be checked for primacy
+  while(q<n){
+      if (all(q %% primes[1:sqrt(q)] != 0)){ 
+        primes = c(primes, q)
+        # cat("\n", "q is: ", q, "\n", "primes looks like: ", head(primes, 5), "... ", tail(primes, 5), "\n", "sum is: ", sum)
+      }
+      
+      # add two to check the next odd number
+      q = q + 2
+  }
+  return(sum(primes))
+}
+
+
+# prime_factors
+# returns a vector of prime factors of n, and a vector of their exponents
+
+# steps
+
+# divide by first prime
+# if remainder is 0, add first prime to factors and update remainder
+# if remainder is not zero, calculate next prime
+# q = last in primes + 2
+# if q is not divisble by any in primes, add it to primes
+# else, add 2 to q
+
+
+# 
+# prime_factors = function(n){
+#   
+#   primes = 2          # array of primes
+#   q = 3               # next candidate to be checked for primacy
+#   factrs = 0          # array of prime factors
+#   expos = 0           # vector of prime exponents
+#   remainder = n
+#   
+#   while(remainder > 0) {
+#     
+#     while (any(remainder %% primes == 0)){                        # if remainder can be divided by any number in prime...
+#       
+#       for (i in length(primes)){                                  # go through the list of primes
+#         
+#         if (remainder %% primes[i] == 0) {                      # if remainder can be divided by primes[i] 
+#         
+#           factrs = c(factrs, primes[i])                           # add ith primes to list of prime factors
+#           # expos[length(expos)] = expos[length(expos)] + 1               # add 1 to the last exponent in the list
+#           
+#           remainder = remainder / q                             # update remainder
+#         
+#         }
+#       }
+#       
+#     }
+#     
+#     
+#     q = q + 2
+#     
+#       # calculate the next prime 
+#         
+#     
+#     while (any(q %% primes == 0)){     # while q is not prime
+#       q = q+2                                     # add two to check the next odd number
+#     }
+#       
+#     primes = c(primes, q)
+#       
+#       
+#           # cat("\n", "q is: ", q, "\n", "primes looks like: ", head(primes, 5), "... ", tail(primes, 5), "\n", "sum is: ", sum)
+#     
+#       
+#                                               
+#     }
+#     return(factrs, expos)
+# }  
+
+# try again!
+
+pr_fac = function(n) {
+  x = c() # array of prime factors
+  r = n # remainder
+  i = 2 # index
+  
+  while (r > 1) { # while remainder is greater than 0
+    
+    if (r %% i == 0) { # if remainder is divisble by i
+      
+      x = c(x,i) # add i to the prime factors vector
+      r = r/i # update remainder
+      i = 1 # reset i to 1 (will get 1 more added below)
+      
+    }
+    
+    i = i + 1
+    
+  }
+  return(x)
+}
+
+# Ok this one works!!!
+  
+```
+  
+  
+Code from Euler 3 to find the largest prime factor (relies on function above)
+
+
+```{r}
+
+num = 600851475143
+new_num = num
+primes = prime_numbers(sqrt(num))
+t = length(primes)
+factors = integer()
+p = 1
+
+for (i in 1:t){
+  if (new_num %% primes[i] == 0) {
+    print(cat("adding ", primes[i], " to factors"))
+    factors[p] = primes[i]
+    p = p+1
+    new_num = new_num/primes[i]
+  }
+  if (new_num == 1) {
+    ans = max(factors)
+    print(cat("answer is ", ans))
+    break
+  }
+}
+
+```
+
+Could utilise my improved primes function... (but this is for the sum of primes up to n)
+
+```{r}
+
+
+=
+```
+
+
+
+---

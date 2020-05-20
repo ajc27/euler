@@ -1758,26 +1758,204 @@ summary {
 <hr />
 <p>Ok so what’s the relationship between nth trianglular number and number of factors?</p>
 <p>Could loop, incrementally add one to the list of triangular numbers, and check the number of divisors…</p>
+<p>number of factors can be found be using prime factorisation (take code from earlier notebook?), and then using :</p>
+<p>N = Xa × Yb × Zc</p>
+<p>Num of prime factros = (a+1)(b+1)(c+1)</p>
+<p>where N is the number to be factorised, X, Y and Z are the prime numbers and a, b and c are their respective powers.</p>
+<div id="steps" class="section level2">
+<h2>Steps</h2>
+<ol style="list-style-type: decimal">
+<li>Find next triangular number (t)</li>
+<li>Calculate primes upto sqrt of t (use a while?)</li>
+<li>Prime factorisation of t, using vecotr of primes Find Num of factors with = (a+1)(b+1)(c+1) if num of factors = &gt;500, return t</li>
+</ol>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudHJpID0gYygxKVxubl9kaXZzID0gMVxuXG5uX2RpdnMgPSBmdW5jdGlvbihuKVxuXG53aGlsZSAobl9kaXZzIDwgNTAwKXtcbiAgaSA9IDFcbiAgXG4gIG5fZGl2cyA9IG5fZGl2cyh0YWlsKHRyaSwgMSkpXG4gIFxufVxuYGBgIn0= -->
-<pre class="r"><code>tri = c(1)
-n_divs = 1
-
-n_divs = function(n)
-
-while (n_divs &lt; 500){
-  i = 1
-  
-  n_divs = n_divs(tail(tri, 1))
-  
-}</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudFxuXG5gYGAifQ== -->
+<pre class="r"><code>t
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDc2NTc2NTAwXG4ifQ== -->
+<pre><code>[1] 76576500</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<table style="width:8%;">
+<colgroup>
+<col width="8%"></col>
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Prime numbers upto N function from euler 3</td>
+</tr>
+<tr class="even">
+<td><!-- rnb-text-end --></td>
+</tr>
+<tr class="odd">
+<td><!-- rnb-chunk-begin --></td>
+</tr>
+<tr class="even">
+<td><!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5cblxuIyBwcmltZV9udW1iZXJzXG4jIHJldHVybnMgYSB2ZWN0b3Igb2YgYWxsIHByaW1lcyBsZXNzIHRoYW4gblxuXG5wcmltZV9udW1iZXJzIDwtIGZ1bmN0aW9uKG4pIHtcbiAgXG4gIGlmIChuIDwgMikgcmV0dXJuKE5VTEwpXG4gIFxuICBwcmltZXNfYm9vbGVhbiA8LSByZXAoVCwgbilcbiAgXG4gIHByaW1lc19ib29sZWFuWzFdIDwtIEZcbiAgXG4gIGZvcihpIGluIHNlcShuKSkge1xuICAgXG4gICAgIGlmIChwcmltZXNfYm9vbGVhbltpXSkge1xuICAgICAgXG4gICAgICAgaV9zcSA8LSBpICogaVxuICAgICAgIFxuICAgICAgaWYgKGlfc3EgPiBuKSByZXR1cm4od2hpY2gocHJpbWVzX2Jvb2xlYW4pKVxuICAgICAgXG4gICAgICAgcHJpbWVzX2Jvb2xlYW5bc2VxKGlfc3EsIG4sIGJ5PWkpXSA8LSBGQUxTRVxuICAgIH1cbiAgfVxufVxuXG5cbiMgc3VtX250aFxuIyByZXR1cm5zIHRoZSBzdW0gb2YgcHJpbWVzIHVwdG8gbnRoIHByaW1lXG5cbnN1bV9udGggPSBmdW5jdGlvbihuKXtcbiAgcHJpbWVzID0gYygyLDMpICMgYXJyYXkgb2YgcHJpbWVzXG4gIHEgPSA1ICAgICAgICAgICAjIG5leHQgY2FuZGlkYXRlIHRvIGJlIGNoZWNrZWQgZm9yIHByaW1hY3lcbiAgd2hpbGUocTxuKXtcbiAgICAgIGlmIChhbGwocSAlJSBwcmltZXNbMTpzcXJ0KHEpXSAhPSAwKSl7IFxuICAgICAgICBwcmltZXMgPSBjKHByaW1lcywgcSlcbiAgICAgICAgIyBjYXQoXCJcXG5cIiwgXCJxIGlzOiBcIiwgcSwgXCJcXG5cIiwgXCJwcmltZXMgbG9va3MgbGlrZTogXCIsIGhlYWQocHJpbWVzLCA1KSwgXCIuLi4gXCIsIHRhaWwocHJpbWVzLCA1KSwgXCJcXG5cIiwgXCJzdW0gaXM6IFwiLCBzdW0pXG4gICAgICB9XG4gICAgICBcbiAgICAgICMgYWRkIHR3byB0byBjaGVjayB0aGUgbmV4dCBvZGQgbnVtYmVyXG4gICAgICBxID0gcSArIDJcbiAgfVxuICByZXR1cm4oc3VtKHByaW1lcykpXG59XG5cblxuIyBwcmltZV9mYWN0b3JzXG4jIHJldHVybnMgYSB2ZWN0b3Igb2YgcHJpbWUgZmFjdG9ycyBvZiBuLCBhbmQgYSB2ZWN0b3Igb2YgdGhlaXIgZXhwb25lbnRzXG5cbiMgc3RlcHNcblxuIyBkaXZpZGUgYnkgZmlyc3QgcHJpbWVcbiMgaWYgcmVtYWluZGVyIGlzIDAsIGFkZCBmaXJzdCBwcmltZSB0byBmYWN0b3JzIGFuZCB1cGRhdGUgcmVtYWluZGVyXG4jIGlmIHJlbWFpbmRlciBpcyBub3QgemVybywgY2FsY3VsYXRlIG5leHQgcHJpbWVcbiMgcSA9IGxhc3QgaW4gcHJpbWVzICsgMlxuIyBpZiBxIGlzIG5vdCBkaXZpc2JsZSBieSBhbnkgaW4gcHJpbWVzLCBhZGQgaXQgdG8gcHJpbWVzXG4jIGVsc2UsIGFkZCAyIHRvIHFcblxuXG4jIFxuIyBwcmltZV9mYWN0b3JzID0gZnVuY3Rpb24obil7XG4jICAgXG4jICAgcHJpbWVzID0gMiAgICAgICAgICAjIGFycmF5IG9mIHByaW1lc1xuIyAgIHEgPSAzICAgICAgICAgICAgICAgIyBuZXh0IGNhbmRpZGF0ZSB0byBiZSBjaGVja2VkIGZvciBwcmltYWN5XG4jICAgZmFjdHJzID0gMCAgICAgICAgICAjIGFycmF5IG9mIHByaW1lIGZhY3RvcnNcbiMgICBleHBvcyA9IDAgICAgICAgICAgICMgdmVjdG9yIG9mIHByaW1lIGV4cG9uZW50c1xuIyAgIHJlbWFpbmRlciA9IG5cbiMgICBcbiMgICB3aGlsZShyZW1haW5kZXIgPiAwKSB7XG4jICAgICBcbiMgICAgIHdoaWxlIChhbnkocmVtYWluZGVyICUlIHByaW1lcyA9PSAwKSl7ICAgICAgICAgICAgICAgICAgICAgICAgIyBpZiByZW1haW5kZXIgY2FuIGJlIGRpdmlkZWQgYnkgYW55IG51bWJlciBpbiBwcmltZS4uLlxuIyAgICAgICBcbiMgICAgICAgZm9yIChpIGluIGxlbmd0aChwcmltZXMpKXsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyBnbyB0aHJvdWdoIHRoZSBsaXN0IG9mIHByaW1lc1xuIyAgICAgICAgIFxuIyAgICAgICAgIGlmIChyZW1haW5kZXIgJSUgcHJpbWVzW2ldID09IDApIHsgICAgICAgICAgICAgICAgICAgICAgIyBpZiByZW1haW5kZXIgY2FuIGJlIGRpdmlkZWQgYnkgcHJpbWVzW2ldIFxuIyAgICAgICAgIFxuIyAgICAgICAgICAgZmFjdHJzID0gYyhmYWN0cnMsIHByaW1lc1tpXSkgICAgICAgICAgICAgICAgICAgICAgICAgICAjIGFkZCBpdGggcHJpbWVzIHRvIGxpc3Qgb2YgcHJpbWUgZmFjdG9yc1xuIyAgICAgICAgICAgIyBleHBvc1tsZW5ndGgoZXhwb3MpXSA9IGV4cG9zW2xlbmd0aChleHBvcyldICsgMSAgICAgICAgICAgICAgICMgYWRkIDEgdG8gdGhlIGxhc3QgZXhwb25lbnQgaW4gdGhlIGxpc3RcbiMgICAgICAgICAgIFxuIyAgICAgICAgICAgcmVtYWluZGVyID0gcmVtYWluZGVyIC8gcSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIyB1cGRhdGUgcmVtYWluZGVyXG4jICAgICAgICAgXG4jICAgICAgICAgfVxuIyAgICAgICB9XG4jICAgICAgIFxuIyAgICAgfVxuIyAgICAgXG4jICAgICBcbiMgICAgIHEgPSBxICsgMlxuIyAgICAgXG4jICAgICAgICMgY2FsY3VsYXRlIHRoZSBuZXh0IHByaW1lIFxuIyAgICAgICAgIFxuIyAgICAgXG4jICAgICB3aGlsZSAoYW55KHEgJSUgcHJpbWVzID09IDApKXsgICAgICMgd2hpbGUgcSBpcyBub3QgcHJpbWVcbiMgICAgICAgcSA9IHErMiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIGFkZCB0d28gdG8gY2hlY2sgdGhlIG5leHQgb2RkIG51bWJlclxuIyAgICAgfVxuIyAgICAgICBcbiMgICAgIHByaW1lcyA9IGMocHJpbWVzLCBxKVxuIyAgICAgICBcbiMgICAgICAgXG4jICAgICAgICAgICAjIGNhdChcIlxcblwiLCBcInEgaXM6IFwiLCBxLCBcIlxcblwiLCBcInByaW1lcyBsb29rcyBsaWtlOiBcIiwgaGVhZChwcmltZXMsIDUpLCBcIi4uLiBcIiwgdGFpbChwcmltZXMsIDUpLCBcIlxcblwiLCBcInN1bSBpczogXCIsIHN1bSlcbiMgICAgIFxuIyAgICAgICBcbiMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIyAgICAgfVxuIyAgICAgcmV0dXJuKGZhY3RycywgZXhwb3MpXG4jIH0gIFxuXG4jIHRyeSBhZ2FpbiFcblxucHJfZmFjID0gZnVuY3Rpb24obikge1xuICB4ID0gYygpICMgYXJyYXkgb2YgcHJpbWUgZmFjdG9yc1xuICByID0gbiAjIHJlbWFpbmRlclxuICBpID0gMiAjIGluZGV4XG4gIFxuICB3aGlsZSAociA+IDEpIHsgIyB3aGlsZSByZW1haW5kZXIgaXMgZ3JlYXRlciB0aGFuIDBcbiAgICBcbiAgICBpZiAociAlJSBpID09IDApIHsgIyBpZiByZW1haW5kZXIgaXMgZGl2aXNibGUgYnkgaVxuICAgICAgXG4gICAgICB4ID0gYyh4LGkpICMgYWRkIGkgdG8gdGhlIHByaW1lIGZhY3RvcnMgdmVjdG9yXG4gICAgICByID0gci9pICMgdXBkYXRlIHJlbWFpbmRlclxuICAgICAgaSA9IDEgIyByZXNldCBpIHRvIDEgKHdpbGwgZ2V0IDEgbW9yZSBhZGRlZCBiZWxvdylcbiAgICAgIFxuICAgIH1cbiAgICBcbiAgICBpID0gaSArIDFcbiAgICBcbiAgfVxuICByZXR1cm4oeClcbn1cblxuIyBPayB0aGlzIG9uZSB3b3JrcyEhIVxuICBcbmBgYCJ9 --></td>
+</tr>
+<tr class="odd">
+<td>```r</td>
+</tr>
+<tr class="even">
+<td># prime_numbers # returns a vector of all primes less than n</td>
+</tr>
+<tr class="odd">
+<td>prime_numbers &lt;- function(n) {</td>
+</tr>
+<tr class="even">
+<td>if (n &lt; 2) return(NULL)</td>
+</tr>
+<tr class="odd">
+<td>primes_boolean &lt;- rep(T, n)</td>
+</tr>
+<tr class="even">
+<td>primes_boolean[1] &lt;- F</td>
+</tr>
+<tr class="odd">
+<td>for(i in seq(n)) {</td>
+</tr>
+<tr class="even">
+<td>if (primes_boolean[i]) {</td>
+</tr>
+<tr class="odd">
+<td>i_sq &lt;- i * i</td>
+</tr>
+<tr class="even">
+<td>if (i_sq &gt; n) return(which(primes_boolean))</td>
+</tr>
+<tr class="odd">
+<td>primes_boolean[seq(i_sq, n, by=i)] &lt;- FALSE } } }</td>
+</tr>
+<tr class="even">
+<td># sum_nth # returns the sum of primes upto nth prime</td>
+</tr>
+<tr class="odd">
+<td>sum_nth = function(n){ primes = c(2,3) # array of primes q = 5 # next candidate to be checked for primacy while(q&lt;n){ if (all(q %% primes[1:sqrt(q)] != 0)){ primes = c(primes, q) # cat(“”, “q is:”, q, “”, “primes looks like:”, head(primes, 5), “…”, tail(primes, 5), “”, “sum is:”, sum) }</td>
+</tr>
+<tr class="even">
+<td># add two to check the next odd number q = q + 2 } return(sum(primes)) }</td>
+</tr>
+<tr class="odd">
+<td># prime_factors # returns a vector of prime factors of n, and a vector of their exponents</td>
+</tr>
+<tr class="even">
+<td># steps</td>
+</tr>
+<tr class="odd">
+<td># divide by first prime # if remainder is 0, add first prime to factors and update remainder # if remainder is not zero, calculate next prime # q = last in primes + 2 # if q is not divisble by any in primes, add it to primes # else, add 2 to q</td>
+</tr>
+<tr class="even">
+<td># # prime_factors = function(n){ # # primes = 2 # array of primes # q = 3 # next candidate to be checked for primacy # factrs = 0 # array of prime factors # expos = 0 # vector of prime exponents # remainder = n # # while(remainder &gt; 0) { # # while (any(remainder %% primes == 0)){ # if remainder can be divided by any number in prime… # # for (i in length(primes)){ # go through the list of primes # # if (remainder %% primes[i] == 0) { # if remainder can be divided by primes[i] # # factrs = c(factrs, primes[i]) # add ith primes to list of prime factors # # expos[length(expos)] = expos[length(expos)] + 1 # add 1 to the last exponent in the list # # remainder = remainder / q # update remainder # # } # } # # } # # # q = q + 2 # # # calculate the next prime # # # while (any(q %% primes == 0)){ # while q is not prime # q = q+2 # add two to check the next odd number # } # # primes = c(primes, q) # # # # cat(“”, “q is:”, q, “”, “primes looks like:”, head(primes, 5), “…”, tail(primes, 5), “”, “sum is:”, sum) # # # # } # return(factrs, expos) # }</td>
+</tr>
+<tr class="odd">
+<td># try again!</td>
+</tr>
+<tr class="even">
+<td>pr_fac = function(n) { x = c() # array of prime factors r = n # remainder i = 2 # index</td>
+</tr>
+<tr class="odd">
+<td>while (r &gt; 1) { # while remainder is greater than 0</td>
+</tr>
+<tr class="even">
+<td>if (r %% i == 0) { # if remainder is divisble by i</td>
+</tr>
+<tr class="odd">
+<td>x = c(x,i) # add i to the prime factors vector r = r/i # update remainder i = 1 # reset i to 1 (will get 1 more added below)</td>
+</tr>
+<tr class="even">
+<td>}</td>
+</tr>
+<tr class="odd">
+<td>i = i + 1</td>
+</tr>
+<tr class="even">
+<td>} return(x) }</td>
+</tr>
+<tr class="odd">
+<td># Ok this one works!!!</td>
+</tr>
+<tr class="even">
+<td>```</td>
+</tr>
+<tr class="odd">
+<td><!-- rnb-source-end --></td>
+</tr>
+<tr class="even">
+<td><!-- rnb-chunk-end --></td>
+</tr>
+<tr class="odd">
+<td><!-- rnb-text-begin --></td>
+</tr>
+<tr class="even">
+<td>Code from Euler 3 to find the largest prime factor (relies on function above)</td>
+</tr>
+<tr class="odd">
+<td><!-- rnb-text-end --></td>
+</tr>
+<tr class="even">
+<td><!-- rnb-chunk-begin --></td>
+</tr>
+<tr class="odd">
+<td><!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5udW0gPSA2MDA4NTE0NzUxNDNcbm5ld19udW0gPSBudW1cbnByaW1lcyA9IHByaW1lX251bWJlcnMoc3FydChudW0pKVxudCA9IGxlbmd0aChwcmltZXMpXG5mYWN0b3JzID0gaW50ZWdlcigpXG5wID0gMVxuXG5mb3IgKGkgaW4gMTp0KXtcbiAgaWYgKG5ld19udW0gJSUgcHJpbWVzW2ldID09IDApIHtcbiAgICBwcmludChjYXQoXCJhZGRpbmcgXCIsIHByaW1lc1tpXSwgXCIgdG8gZmFjdG9yc1wiKSlcbiAgICBmYWN0b3JzW3BdID0gcHJpbWVzW2ldXG4gICAgcCA9IHArMVxuICAgIG5ld19udW0gPSBuZXdfbnVtL3ByaW1lc1tpXVxuICB9XG4gIGlmIChuZXdfbnVtID09IDEpIHtcbiAgICBhbnMgPSBtYXgoZmFjdG9ycylcbiAgICBwcmludChjYXQoXCJhbnN3ZXIgaXMgXCIsIGFucykpXG4gICAgYnJlYWtcbiAgfVxufVxuXG5gYGAifQ== --></td>
+</tr>
+<tr class="even">
+<td>```r</td>
+</tr>
+<tr class="odd">
+<td>num = 600851475143 new_num = num primes = prime_numbers(sqrt(num)) t = length(primes) factors = integer() p = 1</td>
+</tr>
+<tr class="even">
+<td>for (i in 1:t){ if (new_num %% primes[i] == 0) { print(cat(“adding”, primes[i], &quot; to factors“)) factors[p] = primes[i] p = p+1 new_num = new_num/primes[i] } if (new_num == 1) { ans = max(factors) print(cat(”answer is &quot;, ans)) break } }</td>
+</tr>
+<tr class="odd">
+<td>```</td>
+</tr>
+<tr class="even">
+<td><!-- rnb-source-end --></td>
+</tr>
+<tr class="odd">
+<td><!-- rnb-chunk-end --></td>
+</tr>
+<tr class="even">
+<td><!-- rnb-text-begin --></td>
+</tr>
+<tr class="odd">
+<td>Could utilise my improved primes function… (but this is for the sum of primes up to n)</td>
+</tr>
+<tr class="even">
+<td><!-- rnb-text-end --></td>
+</tr>
+<tr class="odd">
+<td><!-- rnb-chunk-begin --></td>
+</tr>
+<tr class="even">
+<td><!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5cbj1cbmBgYCJ9 --></td>
+</tr>
+<tr class="odd">
+<td>```r</td>
+</tr>
+<tr class="even">
+<td>= ```</td>
+</tr>
+<tr class="odd">
+<td><!-- rnb-source-end --></td>
+</tr>
+<tr class="even">
+<td><!-- rnb-chunk-end --></td>
+</tr>
+<tr class="odd">
+<td><!-- rnb-text-begin --></td>
+</tr>
+</tbody>
+</table>
 <!-- rnb-text-end -->
+</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KSGlnaGx5IGRpdmlzaWJsZSB0cmlhbmd1bGFyIG51bWJlcg0KICANClByb2JsZW0gMTINClRoZSBzZXF1ZW5jZSBvZiB0cmlhbmdsZSBudW1iZXJzIGlzIGdlbmVyYXRlZCBieSBhZGRpbmcgdGhlIG5hdHVyYWwgbnVtYmVycy4gU28gdGhlIDd0aCB0cmlhbmdsZSBudW1iZXIgd291bGQgYmUgMSArIDIgKyAzICsgNCArIDUgKyA2ICsgNyA9IDI4LiBUaGUgZmlyc3QgdGVuIHRlcm1zIHdvdWxkIGJlOg0KDQoxLCAzLCA2LCAxMCwgMTUsIDIxLCAyOCwgMzYsIDQ1LCA1NSwgLi4uDQoNCkxldCB1cyBsaXN0IHRoZSBmYWN0b3JzIG9mIHRoZSBmaXJzdCBzZXZlbiB0cmlhbmdsZSBudW1iZXJzOg0KDQogMTogMQ0KIDM6IDEsMw0KIDY6IDEsMiwzLDYNCjEwOiAxLDIsNSwxMA0KMTU6IDEsMyw1LDE1DQoyMTogMSwzLDcsMjENCjI4OiAxLDIsNCw3LDE0LDI4DQpXZSBjYW4gc2VlIHRoYXQgMjggaXMgdGhlIGZpcnN0IHRyaWFuZ2xlIG51bWJlciB0byBoYXZlIG92ZXIgZml2ZSBkaXZpc29ycy4NCg0KV2hhdCBpcyB0aGUgdmFsdWUgb2YgdGhlIGZpcnN0IHRyaWFuZ2xlIG51bWJlciB0byBoYXZlIG92ZXIgZml2ZSBodW5kcmVkIGRpdmlzb3JzPw0KDQotLS0NCg0KT2sgc28gd2hhdCdzIHRoZSByZWxhdGlvbnNoaXAgYmV0d2VlbiBudGggdHJpYW5nbHVsYXIgbnVtYmVyIGFuZCBudW1iZXIgb2YgZmFjdG9ycz8NCg0KQ291bGQgbG9vcCwgaW5jcmVtZW50YWxseSBhZGQgb25lIHRvIHRoZSBsaXN0IG9mIHRyaWFuZ3VsYXIgbnVtYmVycywgYW5kIGNoZWNrIHRoZSBudW1iZXIgb2YgZGl2aXNvcnMuLi4NCg0KYGBge3J9DQp0cmkgPSBjKDEpDQpuX2RpdnMgPSAxDQoNCm5fZGl2cyA9IGZ1bmN0aW9uKG4pDQoNCndoaWxlIChuX2RpdnMgPCA1MDApew0KICBpID0gMQ0KICANCiAgbl9kaXZzID0gbl9kaXZzKHRhaWwodHJpLCAxKSkNCiAgDQp9DQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KSGlnaGx5IGRpdmlzaWJsZSB0cmlhbmd1bGFyIG51bWJlcg0KICANClByb2JsZW0gMTINClRoZSBzZXF1ZW5jZSBvZiB0cmlhbmdsZSBudW1iZXJzIGlzIGdlbmVyYXRlZCBieSBhZGRpbmcgdGhlIG5hdHVyYWwgbnVtYmVycy4gU28gdGhlIDd0aCB0cmlhbmdsZSBudW1iZXIgd291bGQgYmUgMSArIDIgKyAzICsgNCArIDUgKyA2ICsgNyA9IDI4LiBUaGUgZmlyc3QgdGVuIHRlcm1zIHdvdWxkIGJlOg0KDQoxLCAzLCA2LCAxMCwgMTUsIDIxLCAyOCwgMzYsIDQ1LCA1NSwgLi4uDQoNCkxldCB1cyBsaXN0IHRoZSBmYWN0b3JzIG9mIHRoZSBmaXJzdCBzZXZlbiB0cmlhbmdsZSBudW1iZXJzOg0KDQogMTogMQ0KIDM6IDEsMw0KIDY6IDEsMiwzLDYNCjEwOiAxLDIsNSwxMA0KMTU6IDEsMyw1LDE1DQoyMTogMSwzLDcsMjENCjI4OiAxLDIsNCw3LDE0LDI4DQpXZSBjYW4gc2VlIHRoYXQgMjggaXMgdGhlIGZpcnN0IHRyaWFuZ2xlIG51bWJlciB0byBoYXZlIG92ZXIgZml2ZSBkaXZpc29ycy4NCg0KV2hhdCBpcyB0aGUgdmFsdWUgb2YgdGhlIGZpcnN0IHRyaWFuZ2xlIG51bWJlciB0byBoYXZlIG92ZXIgZml2ZSBodW5kcmVkIGRpdmlzb3JzPw0KDQotLS0NCg0KT2sgc28gd2hhdCdzIHRoZSByZWxhdGlvbnNoaXAgYmV0d2VlbiBudGggdHJpYW5nbHVsYXIgbnVtYmVyIGFuZCBudW1iZXIgb2YgZmFjdG9ycz8NCg0KQ291bGQgbG9vcCwgaW5jcmVtZW50YWxseSBhZGQgb25lIHRvIHRoZSBsaXN0IG9mIHRyaWFuZ3VsYXIgbnVtYmVycywgYW5kIGNoZWNrIHRoZSBudW1iZXIgb2YgZGl2aXNvcnMuLi4NCg0KbnVtYmVyIG9mIGZhY3RvcnMgY2FuIGJlIGZvdW5kIGJlIHVzaW5nIHByaW1lIGZhY3RvcmlzYXRpb24gKHRha2UgY29kZSBmcm9tIGVhcmxpZXIgbm90ZWJvb2s/KSwgYW5kIHRoZW4gdXNpbmcgOg0KDQpOID0gWGEgw5cgWWIgw5cgWmMNCg0KTnVtIG9mIHByaW1lIGZhY3Ryb3MgPSAoYSsxKShiKzEpKGMrMSkNCg0Kd2hlcmUgTiBpcyB0aGUgbnVtYmVyIHRvIGJlIGZhY3RvcmlzZWQsIFgsIFkgYW5kIFogYXJlIHRoZSBwcmltZSBudW1iZXJzIGFuZCBhLCBiIGFuZCBjIGFyZSB0aGVpciByZXNwZWN0aXZlIHBvd2Vycy4NCg0KDQpTdGVwcw0KLS0tLS0NCg0KMS4gRmluZCBuZXh0IHRyaWFuZ3VsYXIgbnVtYmVyICh0KQ0KMi4gQ2FsY3VsYXRlIHByaW1lcyB1cHRvIHNxcnQgb2YgdCAodXNlIGEgd2hpbGU/KQ0KMy4gUHJpbWUgZmFjdG9yaXNhdGlvbiBvZiB0LCB1c2luZyB2ZWNvdHIgb2YgcHJpbWVzDQpGaW5kICBOdW0gb2YgZmFjdG9ycyB3aXRoID0gKGErMSkoYisxKShjKzEpDQppZiBudW0gb2YgZmFjdG9ycyA9ID41MDAsIHJldHVybiB0DQoNCg0KYGBge3J9DQoNCg0KDQojIHByaW1lIGZhY3RvcnMgZnVuY3Rpb24NCnByX2ZhYyA9IGZ1bmN0aW9uKG4pIHsNCiAgeCA9IGMoKSAjIGFycmF5IG9mIHByaW1lIGZhY3RvcnMNCiAgciA9IG4gIyByZW1haW5kZXINCiAgaSA9IDIgIyBpbmRleA0KICANCiAgd2hpbGUgKHIgPiAxKSB7ICMgd2hpbGUgcmVtYWluZGVyIGlzIGdyZWF0ZXIgdGhhbiAwDQogICAgDQogICAgaWYgKHIgJSUgaSA9PSAwKSB7ICMgaWYgcmVtYWluZGVyIGlzIGRpdmlzYmxlIGJ5IGkNCiAgICAgIA0KICAgICAgeCA9IGMoeCxpKSAjIGFkZCBpIHRvIHRoZSBwcmltZSBmYWN0b3JzIHZlY3Rvcg0KICAgICAgciA9IHIvaSAjIHVwZGF0ZSByZW1haW5kZXINCiAgICAgIGkgPSAxICMgcmVzZXQgaSB0byAxICh3aWxsIGdldCAxIG1vcmUgYWRkZWQgYmVsb3cpDQogICAgICANCiAgICB9DQogICAgDQogICAgaSA9IGkgKyAxDQogICAgDQogIH0NCiAgcmV0dXJuKHgpDQp9DQoNCiMgZnVuY3Rpb24gdG8gZmluZCB0aGUgbnVtZWJyIG9mIGZhY3RvcnMgKGluYyBub24tcHJpbWVzKQ0KZmFjdG9ycyA9IGZ1bmN0aW9uKG4pew0KDQogIHByaW1lX2ZhY3RvcnMgPSBwcl9mYWMobikgIyB1c2VzIGZ1bmN0aW9uIHByX2ZhYyB0byByZXR1cm4gdmVjdG9yIG9mIHByaW1lIGZhY3RvcnMgKG1heSBpbmNsdWRlIGR1cGxpY2F0ZXMpDQogDQogIHRibCA9IHRhYmxlKHByaW1lX2ZhY3RvcnMpICMgbWFrZSBhIGZyZXF1ZW5jeSB0YWJsZSBvZiBwcmltZSBmYWN0b3JzIChlbGVtZW50cyBhcmUgdGhlIGNvdW50IG9mIGVhY2ggcHJpbWUsIHNvIGFyZSBlcXVpdmFsZW50IHRvIHRoZSBleHBvbmVudHMpDQoNCiAgZXhwb25lbnRzID0gYXMudmVjdG9yKHRibCkgIyBleHRyYWN0IHRoZSBleHBvbmVudHMNCiANCiAgbl9mYWN0b3JzID0gcHJvZChleHBvbmVudHMgKyAxKSAjIE51bSBvZiBwcmltZSBmYWN0b3JzID0gKGErMSkoYisxKShjKzEpDQoNCiAgcmV0dXJuKG5fZmFjdG9ycykNCn0NCg0KIyBsb29wIHRocm91Z2ggdHJpYW5nbGUgbnVtYmVycyB1bnRpbCBmID4gNTAwDQp0ID0gMQ0KaSA9IDENCmYgPSAwDQoNCndoaWxlIChmIDwgNTAwKXsNCiAgaSA9IGkgKyAxDQogIHQgPSB0ICsgaQ0KICBmID0gZmFjdG9ycyh0KQ0KfQ0KDQp0DQoNCmBgYA0KDQoNCg0KDQotLS0tLQ0KUHJpbWUgbnVtYmVycyB1cHRvIE4gZnVuY3Rpb24gZnJvbSBldWxlciAzIA0KDQpgYGB7cn0NCg0KDQoNCiMgcHJpbWVfbnVtYmVycw0KIyByZXR1cm5zIGEgdmVjdG9yIG9mIGFsbCBwcmltZXMgbGVzcyB0aGFuIG4NCg0KcHJpbWVfbnVtYmVycyA8LSBmdW5jdGlvbihuKSB7DQogIA0KICBpZiAobiA8IDIpIHJldHVybihOVUxMKQ0KICANCiAgcHJpbWVzX2Jvb2xlYW4gPC0gcmVwKFQsIG4pDQogIA0KICBwcmltZXNfYm9vbGVhblsxXSA8LSBGDQogIA0KICBmb3IoaSBpbiBzZXEobikpIHsNCiAgIA0KICAgICBpZiAocHJpbWVzX2Jvb2xlYW5baV0pIHsNCiAgICAgIA0KICAgICAgIGlfc3EgPC0gaSAqIGkNCiAgICAgICANCiAgICAgIGlmIChpX3NxID4gbikgcmV0dXJuKHdoaWNoKHByaW1lc19ib29sZWFuKSkNCiAgICAgIA0KICAgICAgIHByaW1lc19ib29sZWFuW3NlcShpX3NxLCBuLCBieT1pKV0gPC0gRkFMU0UNCiAgICB9DQogIH0NCn0NCg0KDQojIHN1bV9udGgNCiMgcmV0dXJucyB0aGUgc3VtIG9mIHByaW1lcyB1cHRvIG50aCBwcmltZQ0KDQpzdW1fbnRoID0gZnVuY3Rpb24obil7DQogIHByaW1lcyA9IGMoMiwzKSAjIGFycmF5IG9mIHByaW1lcw0KICBxID0gNSAgICAgICAgICAgIyBuZXh0IGNhbmRpZGF0ZSB0byBiZSBjaGVja2VkIGZvciBwcmltYWN5DQogIHdoaWxlKHE8bil7DQogICAgICBpZiAoYWxsKHEgJSUgcHJpbWVzWzE6c3FydChxKV0gIT0gMCkpeyANCiAgICAgICAgcHJpbWVzID0gYyhwcmltZXMsIHEpDQogICAgICAgICMgY2F0KCJcbiIsICJxIGlzOiAiLCBxLCAiXG4iLCAicHJpbWVzIGxvb2tzIGxpa2U6ICIsIGhlYWQocHJpbWVzLCA1KSwgIi4uLiAiLCB0YWlsKHByaW1lcywgNSksICJcbiIsICJzdW0gaXM6ICIsIHN1bSkNCiAgICAgIH0NCiAgICAgIA0KICAgICAgIyBhZGQgdHdvIHRvIGNoZWNrIHRoZSBuZXh0IG9kZCBudW1iZXINCiAgICAgIHEgPSBxICsgMg0KICB9DQogIHJldHVybihzdW0ocHJpbWVzKSkNCn0NCg0KDQojIHByaW1lX2ZhY3RvcnMNCiMgcmV0dXJucyBhIHZlY3RvciBvZiBwcmltZSBmYWN0b3JzIG9mIG4sIGFuZCBhIHZlY3RvciBvZiB0aGVpciBleHBvbmVudHMNCg0KIyBzdGVwcw0KDQojIGRpdmlkZSBieSBmaXJzdCBwcmltZQ0KIyBpZiByZW1haW5kZXIgaXMgMCwgYWRkIGZpcnN0IHByaW1lIHRvIGZhY3RvcnMgYW5kIHVwZGF0ZSByZW1haW5kZXINCiMgaWYgcmVtYWluZGVyIGlzIG5vdCB6ZXJvLCBjYWxjdWxhdGUgbmV4dCBwcmltZQ0KIyBxID0gbGFzdCBpbiBwcmltZXMgKyAyDQojIGlmIHEgaXMgbm90IGRpdmlzYmxlIGJ5IGFueSBpbiBwcmltZXMsIGFkZCBpdCB0byBwcmltZXMNCiMgZWxzZSwgYWRkIDIgdG8gcQ0KDQoNCiMgDQojIHByaW1lX2ZhY3RvcnMgPSBmdW5jdGlvbihuKXsNCiMgICANCiMgICBwcmltZXMgPSAyICAgICAgICAgICMgYXJyYXkgb2YgcHJpbWVzDQojICAgcSA9IDMgICAgICAgICAgICAgICAjIG5leHQgY2FuZGlkYXRlIHRvIGJlIGNoZWNrZWQgZm9yIHByaW1hY3kNCiMgICBmYWN0cnMgPSAwICAgICAgICAgICMgYXJyYXkgb2YgcHJpbWUgZmFjdG9ycw0KIyAgIGV4cG9zID0gMCAgICAgICAgICAgIyB2ZWN0b3Igb2YgcHJpbWUgZXhwb25lbnRzDQojICAgcmVtYWluZGVyID0gbg0KIyAgIA0KIyAgIHdoaWxlKHJlbWFpbmRlciA+IDApIHsNCiMgICAgIA0KIyAgICAgd2hpbGUgKGFueShyZW1haW5kZXIgJSUgcHJpbWVzID09IDApKXsgICAgICAgICAgICAgICAgICAgICAgICAjIGlmIHJlbWFpbmRlciBjYW4gYmUgZGl2aWRlZCBieSBhbnkgbnVtYmVyIGluIHByaW1lLi4uDQojICAgICAgIA0KIyAgICAgICBmb3IgKGkgaW4gbGVuZ3RoKHByaW1lcykpeyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIGdvIHRocm91Z2ggdGhlIGxpc3Qgb2YgcHJpbWVzDQojICAgICAgICAgDQojICAgICAgICAgaWYgKHJlbWFpbmRlciAlJSBwcmltZXNbaV0gPT0gMCkgeyAgICAgICAgICAgICAgICAgICAgICAjIGlmIHJlbWFpbmRlciBjYW4gYmUgZGl2aWRlZCBieSBwcmltZXNbaV0gDQojICAgICAgICAgDQojICAgICAgICAgICBmYWN0cnMgPSBjKGZhY3RycywgcHJpbWVzW2ldKSAgICAgICAgICAgICAgICAgICAgICAgICAgICMgYWRkIGl0aCBwcmltZXMgdG8gbGlzdCBvZiBwcmltZSBmYWN0b3JzDQojICAgICAgICAgICAjIGV4cG9zW2xlbmd0aChleHBvcyldID0gZXhwb3NbbGVuZ3RoKGV4cG9zKV0gKyAxICAgICAgICAgICAgICAgIyBhZGQgMSB0byB0aGUgbGFzdCBleHBvbmVudCBpbiB0aGUgbGlzdA0KIyAgICAgICAgICAgDQojICAgICAgICAgICByZW1haW5kZXIgPSByZW1haW5kZXIgLyBxICAgICAgICAgICAgICAgICAgICAgICAgICAgICAjIHVwZGF0ZSByZW1haW5kZXINCiMgICAgICAgICANCiMgICAgICAgICB9DQojICAgICAgIH0NCiMgICAgICAgDQojICAgICB9DQojICAgICANCiMgICAgIA0KIyAgICAgcSA9IHEgKyAyDQojICAgICANCiMgICAgICAgIyBjYWxjdWxhdGUgdGhlIG5leHQgcHJpbWUgDQojICAgICAgICAgDQojICAgICANCiMgICAgIHdoaWxlIChhbnkocSAlJSBwcmltZXMgPT0gMCkpeyAgICAgIyB3aGlsZSBxIGlzIG5vdCBwcmltZQ0KIyAgICAgICBxID0gcSsyICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgYWRkIHR3byB0byBjaGVjayB0aGUgbmV4dCBvZGQgbnVtYmVyDQojICAgICB9DQojICAgICAgIA0KIyAgICAgcHJpbWVzID0gYyhwcmltZXMsIHEpDQojICAgICAgIA0KIyAgICAgICANCiMgICAgICAgICAgICMgY2F0KCJcbiIsICJxIGlzOiAiLCBxLCAiXG4iLCAicHJpbWVzIGxvb2tzIGxpa2U6ICIsIGhlYWQocHJpbWVzLCA1KSwgIi4uLiAiLCB0YWlsKHByaW1lcywgNSksICJcbiIsICJzdW0gaXM6ICIsIHN1bSkNCiMgICAgIA0KIyAgICAgICANCiMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIA0KIyAgICAgfQ0KIyAgICAgcmV0dXJuKGZhY3RycywgZXhwb3MpDQojIH0gIA0KDQojIHRyeSBhZ2FpbiENCg0KcHJfZmFjID0gZnVuY3Rpb24obikgew0KICB4ID0gYygpICMgYXJyYXkgb2YgcHJpbWUgZmFjdG9ycw0KICByID0gbiAjIHJlbWFpbmRlcg0KICBpID0gMiAjIGluZGV4DQogIA0KICB3aGlsZSAociA+IDEpIHsgIyB3aGlsZSByZW1haW5kZXIgaXMgZ3JlYXRlciB0aGFuIDANCiAgICANCiAgICBpZiAociAlJSBpID09IDApIHsgIyBpZiByZW1haW5kZXIgaXMgZGl2aXNibGUgYnkgaQ0KICAgICAgDQogICAgICB4ID0gYyh4LGkpICMgYWRkIGkgdG8gdGhlIHByaW1lIGZhY3RvcnMgdmVjdG9yDQogICAgICByID0gci9pICMgdXBkYXRlIHJlbWFpbmRlcg0KICAgICAgaSA9IDEgIyByZXNldCBpIHRvIDEgKHdpbGwgZ2V0IDEgbW9yZSBhZGRlZCBiZWxvdykNCiAgICAgIA0KICAgIH0NCiAgICANCiAgICBpID0gaSArIDENCiAgICANCiAgfQ0KICByZXR1cm4oeCkNCn0NCg0KIyBPayB0aGlzIG9uZSB3b3JrcyEhIQ0KICANCmBgYA0KICANCiAgDQpDb2RlIGZyb20gRXVsZXIgMyB0byBmaW5kIHRoZSBsYXJnZXN0IHByaW1lIGZhY3RvciAocmVsaWVzIG9uIGZ1bmN0aW9uIGFib3ZlKQ0KDQoNCmBgYHtyfQ0KDQpudW0gPSA2MDA4NTE0NzUxNDMNCm5ld19udW0gPSBudW0NCnByaW1lcyA9IHByaW1lX251bWJlcnMoc3FydChudW0pKQ0KdCA9IGxlbmd0aChwcmltZXMpDQpmYWN0b3JzID0gaW50ZWdlcigpDQpwID0gMQ0KDQpmb3IgKGkgaW4gMTp0KXsNCiAgaWYgKG5ld19udW0gJSUgcHJpbWVzW2ldID09IDApIHsNCiAgICBwcmludChjYXQoImFkZGluZyAiLCBwcmltZXNbaV0sICIgdG8gZmFjdG9ycyIpKQ0KICAgIGZhY3RvcnNbcF0gPSBwcmltZXNbaV0NCiAgICBwID0gcCsxDQogICAgbmV3X251bSA9IG5ld19udW0vcHJpbWVzW2ldDQogIH0NCiAgaWYgKG5ld19udW0gPT0gMSkgew0KICAgIGFucyA9IG1heChmYWN0b3JzKQ0KICAgIHByaW50KGNhdCgiYW5zd2VyIGlzICIsIGFucykpDQogICAgYnJlYWsNCiAgfQ0KfQ0KDQpgYGANCg0KQ291bGQgdXRpbGlzZSBteSBpbXByb3ZlZCBwcmltZXMgZnVuY3Rpb24uLi4gKGJ1dCB0aGlzIGlzIGZvciB0aGUgc3VtIG9mIHByaW1lcyB1cCB0byBuKQ0KDQpgYGB7cn0NCg0KDQo9DQpgYGANCg0KDQoNCi0tLQ==</div>
 
 
 

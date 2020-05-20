@@ -12,6 +12,9 @@ Problem 5
 
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
+
+---
+
 I thought this was going to be a small number, which was why I tried this method... (got upto 20 million before I stopped it)
 
 Then did some reading on least common multiples
