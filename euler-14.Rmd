@@ -1,0 +1,104 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+Longest Collatz sequence
+
+Problem 14
+The following iterative sequence is defined for the set of positive integers:
+
+n → n/2 (n is even)
+n → 3n + 1 (n is odd)
+
+Using the rule above and starting with 13, we generate the following sequence:
+
+13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
+It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+
+Which starting number, under one million, produces the longest chain?
+
+NOTE: Once the chain starts the terms are allowed to go above one million.
+
+---
+
+
+Need to store number of 'jumps' for each number in an array. Then for each jump, check whether it's already been computed, if not, compute the next just.
+
+
+```{r}
+# Function to find the next Collatz number
+
+nxt_collatz = function(n){
+  
+  if(!n%%2){ # if n is even
+    n = n/2
+  }
+  else {
+    n = n*3+1
+  }
+}
+
+
+```
+After lots of faff trying to unsuccessfully store number of loops and refer to them as we increment through the chain... (all of that below) I gave up and just calculated the chain length for every number upto 1000000, which took about 3-4 minutes.
+
+```{r}
+arr = matrix(1, 1, 1000000) # start our matrix of results
+
+  
+for (i in 2:1000000){
+  
+  n = i
+  
+  if (!i %% 500){cat("\n i = ",i)}
+  
+  while (n > 1) {
+  
+  n = nxt_collatz(n)
+  
+  arr[i] = arr[i] + 1
+  
+  }
+  
+}
+# then find the biggest number in arr
+m = max(arr)
+# then find the position of that number in the array
+ans = match(m, arr)
+```
+
+
+```{r}
+
+### Junky stuff from trying to figure out recursive loop system, saved here to remind me that sometimes it's not worth it
+arr[i] = arr[n] + 1
+    
+}
+
+  if (!n !%in% arr){ # if n is not already stored in the array
+    
+    n = nxt_collatz(n)
+    
+    arr[n] = arr[n] + 1
+  
+  }
+  
+}
+
+
+arr = c(1, 2, 3, 4)
+!10 %in% arr
+
+
+arr3 = c(arr2, c(6,7))
+
+arr3
+
+arr[10] = arr[10] + 1
+
+arr[6] = 1
+arr
+all(arr<4, na.rm = T)
+
+```
+

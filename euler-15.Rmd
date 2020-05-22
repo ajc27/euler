@@ -1,0 +1,82 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+Lattice paths
+  
+Problem 15
+Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.
+
+How many such routes are there through a 20×20 grid?
+
+--- 
+
+it always takes four moves (for 2x2), for an i x i grid, it'll take 2i moves
+
+so for 20 x 20 it'll be 40 moves
+
+half of them must be down and half right
+
+every series of moves has an 'opposite' which is the same but reversed
+
+can be represented by a 1:40 chain of 1s and 0s, i think, each one being a move
+  total of the chain must equal 20
+  
+  so how many combinations of 0 and 1, 40 in length, make up 20?
+  
+  if it's 4 in length:
+  0011
+  0101
+  0110
+  1001
+  1010
+  1100 = 6
+  
+  6 in length
+  
+  000111
+  001011
+  001101
+  001110
+  010011
+  010101
+  010110
+  011001
+  011010
+  011100
+  100011
+  100101
+  100110
+  101001
+  101010
+  101100
+  110001
+  110010
+  110100
+  111000 = 20
+
+Total possible combinations must be 2^i
+
+Maybe the total, over i, is the number of combinations that equal i/2?
+
+for i = 4
+combos c = 2^4 = 16
+combos that equal i/2 = c/i = 16/4 = 4 
+
+so that's not right...
+
+for i = 4, there's 4 combos that = 1
+  5 wher c = 2
+  6 wher c = 3
+  1 wher c = 4
+  
+for i = 6, there's 6 where c = 1
+  15 where c = 2
+  
+
+```{r}
+2^4
+```
+
+
+

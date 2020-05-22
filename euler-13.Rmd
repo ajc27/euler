@@ -213,11 +213,14 @@ input = ("37107287533902102798797998220837590246510135740250
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690")
 
-vec = as.integer(unlist(strsplit(input, "\n")))
+# vec = as.integer(unlist(strsplit(input, "\n")))
 
 # numbers are too big to be stored as integers...
 
 vec = unlist(strsplit(input, "\n"))
+
+
+#this approach didn't work...
 
 sm = 0
 t = 0
@@ -230,10 +233,23 @@ t = t + floor(sm/10)
 
 cat("\n", "i =  ", i, "\n" , "t[i] = ", t, "\n", "sm = ", sm)
 
- if (i < 11){
+ if (i < 11 && i > 1){
     a[i] = sm %% 10
  }
-
+  if (i == 1) {
+    a[i] = sm
+  }
 }
 
 ```
+
+
+So I used package 'gmp' (is that cheating?)
+
+
+```{r}
+vec = unlist(strsplit(input, "\n"))
+vec = as.bigz(vec)
+ans = sum(vec)
+```
+
