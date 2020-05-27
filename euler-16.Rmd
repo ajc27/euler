@@ -10,4 +10,12 @@ Problem 16
 What is the sum of the digits of the number 2^1000?
 
 ---
+```{r}
+library(gmp)
+ans = unlist(strsplit(an,""))
+an = as.character(as.bigz(2^1000))
+sum(as.integer(ans))
+
+```
+
 

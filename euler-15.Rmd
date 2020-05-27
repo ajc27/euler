@@ -78,5 +78,36 @@ for i = 6, there's 6 where c = 1
 2^4
 ```
 
+I did a lot of trial runs on paper working through the example with 1s and 0s
+
+then did the same with a box and arrows
+
+ended up researching the CENTRAL BINOMIAL COEFFICIENT
+
+which is:
+
+(2n/n) = 2n!/((n!)^2)
+
+so for n = 4 (which is the case for a 4 x 4 box)
+
+= 8! / 4! ^2 = ( 8 x 7 x 6 x 5 x 4! ) / ( 4! x 4!) = (cancel the 4!s) = 8x7x6x5 / 4x3x2x1
+
+so the question becomes, what is 40!/20!^2
+
+Using a factorial function
+
+```{r}
+
+cbc = function(n){
+  x = factorial(2*n)/(factorial(n))^2
+  return(x)
+}
+```
 
 
+
+```{r}
+ans = cbc(20)
+
+ans
+```

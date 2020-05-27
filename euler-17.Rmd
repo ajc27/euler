@@ -1,0 +1,131 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+Number letter counts
+  
+Problem 17
+If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+
+If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+
+
+NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of "and" when writing out numbers is in compliance with British usage.
+
+---
+
+Loord... how to approach this...
+
+one
+two
+three
+four
+five
+six
+seven
+eight
+nine
+ten
+eleven
+twelve
+thirteen
+fourteen
+fifteen
+sixteen
+seventeen
+eighteen
+nineteen
+
+
+```{r}
+
+singles_text = c("one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen")
+tens_text = c("ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety")
+
+singles2 = nchar(singles_text)
+tens2 = nchar(tens_text)
+singles - singles2
+tens - tens2
+
+# build an array of character counts for each digit Position
+
+singles = c(3, 3, 5, 4, 4, 3, 5, 5, 4, 3, 6, 6, 8, 8, 7, 7, 9, 8, 8)
+tens = c(3, 6, 6, 5, 5, 5, 7, 6, 6)
+hundred = 7
+and = 3
+thousand = 11
+
+arr = matrix(0,1,1000)
+sum = c()
+
+# for (i in 1:1000) {
+  
+i = 11  
+arr[i]
+
+  char = unlist(strsplit(as.character(i), ""))
+  s = as.integer(char[length(char)])
+  t = as.integer(char[length(char)-1])
+  h = as.integer(char[length(char)-2])
+
+  if (!i%%10){
+    if (!i%%100){
+      if (i == 1000){
+        arr[i] = thousand
+      }
+      else {
+        arr[i] = singles[h] + hundred
+      }
+    }
+  }
+  else {
+    if (i<20){
+      arr[i] = singles[s]
+    }
+    else {
+      if (i<100) {
+        arr[i] = tens[t] + singles[s]
+      }
+      else {
+        if (t < 2){
+          arr[i] = singles[h] + hundred + and + singles[s]
+        }
+        else {
+          arr[i] = singles[h] + hundred + and + tens[t] + singles[s]
+        }
+      }
+      
+    }
+  }
+  
+}
+
+ans = sum(arr)
+
+```
+
+
+how many different formats are there?
+
+a, 1-20: singles
+b, 21-99 (exluding multiples of 10): tens + singles
+c, multiples of 10 > 100 (20, 30, 40 ... 90): ten
+d, multiples of 100 (100, 200, 300, 400 ... 900): single + "hundred"
+e, multiples of 10 over one hundred (excluding multiples of 100): single + "hundred and" + tens
+f, 101-999 (exluding multiples of ten): single + "hundred and" + tens + singles
+g, 1000: "one thousand"
+
+test for multiple of ten
+  y: 
+    test for multiple of 100
+      y:
+        test for equals 1000
+          y: sum = g
+          n: sum = d[j]
+  n: 
+    test for <20
+      y: sum = a[j]
+      n:
+        test for <100
+          y: sum = b[j]        
+          n: sum = f[j]

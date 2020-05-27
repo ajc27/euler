@@ -1749,68 +1749,31 @@ summary {
 
 
 <!-- rnb-text-begin -->
-<p>Lattice paths</p>
-<p>Problem 15 Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner.</p>
-<p>How many such routes are there through a 20×20 grid?</p>
+<p>Number letter counts</p>
+<p>Problem 17 If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.</p>
+<p>If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?</p>
+<p>NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of “and” when writing out numbers is in compliance with British usage.</p>
 <hr />
-<p>it always takes four moves (for 2x2), for an i x i grid, it’ll take 2i moves</p>
-<p>so for 20 x 20 it’ll be 40 moves</p>
-<p>half of them must be down and half right</p>
-<p>every series of moves has an ‘opposite’ which is the same but reversed</p>
-<p>can be represented by a 1:40 chain of 1s and 0s, i think, each one being a move total of the chain must equal 20</p>
-<p>so how many combinations of 0 and 1, 40 in length, make up 20?</p>
-<p>if it’s 4 in length: 0011 0101 0110 1001 1010 1100 = 6</p>
-<p>6 in length</p>
-<p>000111 001011 001101 001110 010011 010101 010110 011001 011010 011100 100011 100101 100110 101001 101010 101100 110001 110010 110100 111000 = 20</p>
-<p>Total possible combinations must be 2^i</p>
-<p>Maybe the total, over i, is the number of combinations that equal i/2?</p>
-<p>for i = 4 combos c = 2^4 = 16 combos that equal i/2 = c/i = 16/4 = 4</p>
-<p>so that’s not right…</p>
-<p>for i = 4, there’s 4 combos that = 1 5 wher c = 2 6 wher c = 3 1 wher c = 4</p>
-<p>for i = 6, there’s 6 where c = 1 15 where c = 2</p>
+<p>Loord… how to approach this…</p>
+<p>one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuMl40XG5cbmBgYCJ9 -->
-<pre class="r"><code>2^4
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXJyW2ldXG5cbmBgYCJ9 -->
+<pre class="r"><code>arr[i]
 </code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE2XG4ifQ== -->
-<pre><code>[1] 16</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDNcbiJ9 -->
+<pre><code>[1] 3</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>I did a lot of trial runs on paper working through the example with 1s and 0s</p>
-<p>then did the same with a box and arrows</p>
-<p>ended up researching the CENTRAL BINOMIAL COEFFICIENT</p>
-<p>which is:</p>
-<p>(2n/n) = 2n!/((n!)^2)</p>
-<p>so for n = 4 (which is the case for a 4 x 4 box)</p>
-<p>= 8! / 4! ^2 = ( 8 x 7 x 6 x 5 x 4! ) / ( 4! x 4!) = (cancel the 4!s) = 8x7x6x5 / 4x3x2x1</p>
-<p>so the question becomes, what is 40!/20!^2</p>
-<p>Using a factorial function</p>
+<p>how many different formats are there?</p>
+<p>a, 1-20: singles b, 21-99 (exluding multiples of 10): tens + singles c, multiples of 10 &gt; 100 (20, 30, 40 … 90): ten d, multiples of 100 (100, 200, 300, 400 … 900): single + “hundred” e, multiples of 10 over one hundred (excluding multiples of 100): single + “hundred and” + tens f, 101-999 (exluding multiples of ten): single + “hundred and” + tens + singles g, 1000: “one thousand”</p>
+<p>test for multiple of ten y: test for multiple of 100 y: test for equals 1000 y: sum = g n: sum = d[j] n: test for &lt;20 y: sum = a[j] n: test for &lt;100 y: sum = b[j]<br />
+n: sum = f[j]</p>
 <!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5jYmMgPSBmdW5jdGlvbihuKXtcbiAgeCA9IGZhY3RvcmlhbCgyKm4pLyhmYWN0b3JpYWwobikpXjJcbiAgcmV0dXJuKHgpXG59XG5gYGAifQ== -->
-<pre class="r"><code>
-cbc = function(n){
-  x = factorial(2*n)/(factorial(n))^2
-  return(x)
-}</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5zXG5cbmBgYCJ9 -->
-<pre class="r"><code>ans
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEzNzg0NjUyODgyMFxuIn0= -->
-<pre><code>[1] 137846528820</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KTGF0dGljZSBwYXRocw0KICANClByb2JsZW0gMTUNClN0YXJ0aW5nIGluIHRoZSB0b3AgbGVmdCBjb3JuZXIgb2YgYSAyw5cyIGdyaWQsIGFuZCBvbmx5IGJlaW5nIGFibGUgdG8gbW92ZSB0byB0aGUgcmlnaHQgYW5kIGRvd24sIHRoZXJlIGFyZSBleGFjdGx5IDYgcm91dGVzIHRvIHRoZSBib3R0b20gcmlnaHQgY29ybmVyLg0KDQpIb3cgbWFueSBzdWNoIHJvdXRlcyBhcmUgdGhlcmUgdGhyb3VnaCBhIDIww5cyMCBncmlkPw0KDQotLS0gDQoNCml0IGFsd2F5cyB0YWtlcyBmb3VyIG1vdmVzIChmb3IgMngyKSwgZm9yIGFuIGkgeCBpIGdyaWQsIGl0J2xsIHRha2UgMmkgbW92ZXMNCg0Kc28gZm9yIDIwIHggMjAgaXQnbGwgYmUgNDAgbW92ZXMNCg0KaGFsZiBvZiB0aGVtIG11c3QgYmUgZG93biBhbmQgaGFsZiByaWdodA0KDQpldmVyeSBzZXJpZXMgb2YgbW92ZXMgaGFzIGFuICdvcHBvc2l0ZScgd2hpY2ggaXMgdGhlIHNhbWUgYnV0IHJldmVyc2VkDQoNCmNhbiBiZSByZXByZXNlbnRlZCBieSBhIDE6NDAgY2hhaW4gb2YgMXMgYW5kIDBzLCBpIHRoaW5rLCBlYWNoIG9uZSBiZWluZyBhIG1vdmUNCiAgdG90YWwgb2YgdGhlIGNoYWluIG11c3QgZXF1YWwgMjANCiAgDQogIHNvIGhvdyBtYW55IGNvbWJpbmF0aW9ucyBvZiAwIGFuZCAxLCA0MCBpbiBsZW5ndGgsIG1ha2UgdXAgMjA/DQogIA0KICBpZiBpdCdzIDQgaW4gbGVuZ3RoOg0KICAwMDExDQogIDAxMDENCiAgMDExMA0KICAxMDAxDQogIDEwMTANCiAgMTEwMCA9IDYNCiAgDQogIDYgaW4gbGVuZ3RoDQogIA0KICAwMDAxMTENCiAgMDAxMDExDQogIDAwMTEwMQ0KICAwMDExMTANCiAgMDEwMDExDQogIDAxMDEwMQ0KICAwMTAxMTANCiAgMDExMDAxDQogIDAxMTAxMA0KICAwMTExMDANCiAgMTAwMDExDQogIDEwMDEwMQ0KICAxMDAxMTANCiAgMTAxMDAxDQogIDEwMTAxMA0KICAxMDExMDANCiAgMTEwMDAxDQogIDExMDAxMA0KICAxMTAxMDANCiAgMTExMDAwID0gMjANCg0KVG90YWwgcG9zc2libGUgY29tYmluYXRpb25zIG11c3QgYmUgMl5pDQoNCk1heWJlIHRoZSB0b3RhbCwgb3ZlciBpLCBpcyB0aGUgbnVtYmVyIG9mIGNvbWJpbmF0aW9ucyB0aGF0IGVxdWFsIGkvMj8NCg0KZm9yIGkgPSA0DQpjb21ib3MgYyA9IDJeNCA9IDE2DQpjb21ib3MgdGhhdCBlcXVhbCBpLzIgPSBjL2kgPSAxNi80ID0gNCANCg0Kc28gdGhhdCdzIG5vdCByaWdodC4uLg0KDQpmb3IgaSA9IDQsIHRoZXJlJ3MgNCBjb21ib3MgdGhhdCA9IDENCiAgNSB3aGVyIGMgPSAyDQogIDYgd2hlciBjID0gMw0KICAxIHdoZXIgYyA9IDQNCiAgDQpmb3IgaSA9IDYsIHRoZXJlJ3MgNiB3aGVyZSBjID0gMQ0KICAxNSB3aGVyZSBjID0gMg0KICANCg0KYGBge3J9DQoyXjQNCmBgYA0KDQpJIGRpZCBhIGxvdCBvZiB0cmlhbCBydW5zIG9uIHBhcGVyIHdvcmtpbmcgdGhyb3VnaCB0aGUgZXhhbXBsZSB3aXRoIDFzIGFuZCAwcw0KDQp0aGVuIGRpZCB0aGUgc2FtZSB3aXRoIGEgYm94IGFuZCBhcnJvd3MNCg0KZW5kZWQgdXAgcmVzZWFyY2hpbmcgdGhlIENFTlRSQUwgQklOT01JQUwgQ09FRkZJQ0lFTlQNCg0Kd2hpY2ggaXM6DQoNCigybi9uKSA9IDJuIS8oKG4hKV4yKQ0KDQpzbyBmb3IgbiA9IDQgKHdoaWNoIGlzIHRoZSBjYXNlIGZvciBhIDQgeCA0IGJveCkNCg0KPSA4ISAvIDQhIF4yID0gKCA4IHggNyB4IDYgeCA1IHggNCEgKSAvICggNCEgeCA0ISkgPSAoY2FuY2VsIHRoZSA0IXMpID0gOHg3eDZ4NSAvIDR4M3gyeDENCg0Kc28gdGhlIHF1ZXN0aW9uIGJlY29tZXMsIHdoYXQgaXMgNDAhLzIwIV4yDQoNClVzaW5nIGEgZmFjdG9yaWFsIGZ1bmN0aW9uDQoNCmBgYHtyfQ0KDQpjYmMgPSBmdW5jdGlvbihuKXsNCiAgeCA9IGZhY3RvcmlhbCgyKm4pLyhmYWN0b3JpYWwobikpXjINCiAgcmV0dXJuKHgpDQp9DQpgYGANCg0KDQoNCmBgYHtyfQ0KYW5zID0gY2JjKDIwKQ0KDQphbnMNCmBgYA==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KTnVtYmVyIGxldHRlciBjb3VudHMNCiAgDQpQcm9ibGVtIDE3DQpJZiB0aGUgbnVtYmVycyAxIHRvIDUgYXJlIHdyaXR0ZW4gb3V0IGluIHdvcmRzOiBvbmUsIHR3bywgdGhyZWUsIGZvdXIsIGZpdmUsIHRoZW4gdGhlcmUgYXJlIDMgKyAzICsgNSArIDQgKyA0ID0gMTkgbGV0dGVycyB1c2VkIGluIHRvdGFsLg0KDQpJZiBhbGwgdGhlIG51bWJlcnMgZnJvbSAxIHRvIDEwMDAgKG9uZSB0aG91c2FuZCkgaW5jbHVzaXZlIHdlcmUgd3JpdHRlbiBvdXQgaW4gd29yZHMsIGhvdyBtYW55IGxldHRlcnMgd291bGQgYmUgdXNlZD8NCg0KDQpOT1RFOiBEbyBub3QgY291bnQgc3BhY2VzIG9yIGh5cGhlbnMuIEZvciBleGFtcGxlLCAzNDIgKHRocmVlIGh1bmRyZWQgYW5kIGZvcnR5LXR3bykgY29udGFpbnMgMjMgbGV0dGVycyBhbmQgMTE1IChvbmUgaHVuZHJlZCBhbmQgZmlmdGVlbikgY29udGFpbnMgMjAgbGV0dGVycy4gVGhlIHVzZSBvZiAiYW5kIiB3aGVuIHdyaXRpbmcgb3V0IG51bWJlcnMgaXMgaW4gY29tcGxpYW5jZSB3aXRoIEJyaXRpc2ggdXNhZ2UuDQoNCi0tLQ0KDQpMb29yZC4uLiBob3cgdG8gYXBwcm9hY2ggdGhpcy4uLg0KDQpvbmUNCnR3bw0KdGhyZWUNCmZvdXINCmZpdmUNCnNpeA0Kc2V2ZW4NCmVpZ2h0DQpuaW5lDQp0ZW4NCmVsZXZlbg0KdHdlbHZlDQp0aGlydGVlbg0KZm91cnRlZW4NCmZpZnRlZW4NCnNpeHRlZW4NCnNldmVudGVlbg0KZWlnaHRlZW4NCm5pbmV0ZWVuDQoNCg0KYGBge3J9DQoNCnNpbmdsZXNfdGV4dCA9IGMoIm9uZSIsInR3byIsInRocmVlIiwiZm91ciIsImZpdmUiLCJzaXgiLCJzZXZlbiIsImVpZ2h0IiwibmluZSIsInRlbiIsImVsZXZlbiIsInR3ZWx2ZSIsInRoaXJ0ZWVuIiwiZm91cnRlZW4iLCJmaWZ0ZWVuIiwic2l4dGVlbiIsInNldmVudGVlbiIsImVpZ2h0ZWVuIiwibmluZXRlZW4iKQ0KdGVuc190ZXh0ID0gYygidGVuIiwgInR3ZW50eSIsICJ0aGlydHkiLCAiZm9ydHkiLCAiZmlmdHkiLCAic2l4dHkiLCAic2V2ZW50eSIsICJlaWdodHkiLCAibmluZXR5IikNCg0Kc2luZ2xlczIgPSBuY2hhcihzaW5nbGVzX3RleHQpDQp0ZW5zMiA9IG5jaGFyKHRlbnNfdGV4dCkNCnNpbmdsZXMgLSBzaW5nbGVzMg0KdGVucyAtIHRlbnMyDQoNCiMgYnVpbGQgYW4gYXJyYXkgb2YgY2hhcmFjdGVyIGNvdW50cyBmb3IgZWFjaCBkaWdpdCBQb3NpdGlvbg0KDQpzaW5nbGVzID0gYygzLCAzLCA1LCA0LCA0LCAzLCA1LCA1LCA0LCAzLCA2LCA2LCA4LCA4LCA3LCA3LCA5LCA4LCA4KQ0KdGVucyA9IGMoMywgNiwgNiwgNSwgNSwgNSwgNywgNiwgNikNCmh1bmRyZWQgPSA3DQphbmQgPSAzDQp0aG91c2FuZCA9IDExDQoNCmFyciA9IG1hdHJpeCgwLDEsMTAwMCkNCnN1bSA9IGMoKQ0KDQojIGZvciAoaSBpbiAxOjEwMDApIHsNCiAgDQppID0gMTEgIA0KYXJyW2ldDQoNCiAgY2hhciA9IHVubGlzdChzdHJzcGxpdChhcy5jaGFyYWN0ZXIoaSksICIiKSkNCiAgcyA9IGFzLmludGVnZXIoY2hhcltsZW5ndGgoY2hhcildKQ0KICB0ID0gYXMuaW50ZWdlcihjaGFyW2xlbmd0aChjaGFyKS0xXSkNCiAgaCA9IGFzLmludGVnZXIoY2hhcltsZW5ndGgoY2hhciktMl0pDQoNCiAgaWYgKCFpJSUxMCl7DQogICAgaWYgKCFpJSUxMDApew0KICAgICAgaWYgKGkgPT0gMTAwMCl7DQogICAgICAgIGFycltpXSA9IHRob3VzYW5kDQogICAgICB9DQogICAgICBlbHNlIHsNCiAgICAgICAgYXJyW2ldID0gc2luZ2xlc1toXSArIGh1bmRyZWQNCiAgICAgIH0NCiAgICB9DQogIH0NCiAgZWxzZSB7DQogICAgaWYgKGk8MjApew0KICAgICAgYXJyW2ldID0gc2luZ2xlc1tzXQ0KICAgIH0NCiAgICBlbHNlIHsNCiAgICAgIGlmIChpPDEwMCkgew0KICAgICAgICBhcnJbaV0gPSB0ZW5zW3RdICsgc2luZ2xlc1tzXQ0KICAgICAgfQ0KICAgICAgZWxzZSB7DQogICAgICAgIGlmICh0IDwgMil7DQogICAgICAgICAgYXJyW2ldID0gc2luZ2xlc1toXSArIGh1bmRyZWQgKyBhbmQgKyBzaW5nbGVzW3NdDQogICAgICAgIH0NCiAgICAgICAgZWxzZSB7DQogICAgICAgICAgYXJyW2ldID0gc2luZ2xlc1toXSArIGh1bmRyZWQgKyBhbmQgKyB0ZW5zW3RdICsgc2luZ2xlc1tzXQ0KICAgICAgICB9DQogICAgICB9DQogICAgICANCiAgICB9DQogIH0NCiAgDQp9DQoNCmFucyA9IHN1bShhcnIpDQoNCmBgYA0KDQoNCmhvdyBtYW55IGRpZmZlcmVudCBmb3JtYXRzIGFyZSB0aGVyZT8NCg0KYSwgMS0yMDogc2luZ2xlcw0KYiwgMjEtOTkgKGV4bHVkaW5nIG11bHRpcGxlcyBvZiAxMCk6IHRlbnMgKyBzaW5nbGVzDQpjLCBtdWx0aXBsZXMgb2YgMTAgPiAxMDAgKDIwLCAzMCwgNDAgLi4uIDkwKTogdGVuDQpkLCBtdWx0aXBsZXMgb2YgMTAwICgxMDAsIDIwMCwgMzAwLCA0MDAgLi4uIDkwMCk6IHNpbmdsZSArICJodW5kcmVkIg0KZSwgbXVsdGlwbGVzIG9mIDEwIG92ZXIgb25lIGh1bmRyZWQgKGV4Y2x1ZGluZyBtdWx0aXBsZXMgb2YgMTAwKTogc2luZ2xlICsgImh1bmRyZWQgYW5kIiArIHRlbnMNCmYsIDEwMS05OTkgKGV4bHVkaW5nIG11bHRpcGxlcyBvZiB0ZW4pOiBzaW5nbGUgKyAiaHVuZHJlZCBhbmQiICsgdGVucyArIHNpbmdsZXMNCmcsIDEwMDA6ICJvbmUgdGhvdXNhbmQiDQoNCnRlc3QgZm9yIG11bHRpcGxlIG9mIHRlbg0KICB5OiANCiAgICB0ZXN0IGZvciBtdWx0aXBsZSBvZiAxMDANCiAgICAgIHk6DQogICAgICAgIHRlc3QgZm9yIGVxdWFscyAxMDAwDQogICAgICAgICAgeTogc3VtID0gZw0KICAgICAgICAgIG46IHN1bSA9IGRbal0NCiAgbjogDQogICAgdGVzdCBmb3IgPDIwDQogICAgICB5OiBzdW0gPSBhW2pdDQogICAgICBuOg0KICAgICAgICB0ZXN0IGZvciA8MTAwDQogICAgICAgICAgeTogc3VtID0gYltqXSAgICAgICAgDQogICAgICAgICAgbjogc3VtID0gZltqXQ0K</div>
 
 
 
@@ -1857,7 +1820,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("euler-15.Rmd");
+  window.initializeSourceEmbed("euler-17.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
